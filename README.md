@@ -1,18 +1,14 @@
-# sv
+# RepoScoop 📦🔍
+*Skim GitHub release notes in a single glance.*
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+RepoScoop solves the pain of navigating releases in large repositories—especially monorepos. Paste any GitHub repo URL and get an instant, collapsible view of each package’s versions alongside their release notes, grouped by package name for quick scanning.
 
-## Creating a project
+## Core Idea
 
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
-```
+1. **Single‑input workflow** – one textbox, one button.
+2. **Smart grouping** – releases organized by detected package name.
+3. **Collapsible drill‑down** – expand a package to see version tags and full release bodies.
+4. **Clean UI** – built with shadcn‑svelte for accessibility and speed.
 
 ## Developing
 
