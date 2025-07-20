@@ -3,32 +3,137 @@
 
 RepoScoop solves the pain of navigating releases in large repositories—especially monorepos. Paste any GitHub repo URL and get an instant, collapsible view of each package’s versions alongside their release notes, grouped by package name for quick scanning.
 
-## Core Idea
+## Features
 
 1. **Single‑input workflow** – one textbox, one button.
 2. **Smart grouping** – releases organized by detected package name.
 3. **Collapsible drill‑down** – expand a package to see version tags and full release bodies.
 4. **Clean UI** – built with shadcn‑svelte for accessibility and speed.
+5. **Fast performance** – client-side processing with efficient caching.
+6. **Mobile-friendly** – responsive design works on all devices.
 
-## Developing
+## Demo
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+[Live Demo](https://reposcoop.pages.dev) (Coming soon)
+
+Try it with these example repositories:
+- [clerk/javascript](https://github.com/clerk/javascript) - Authentication library with multiple packages
+- [vercel/next.js](https://github.com/vercel/next.js) - React framework with many releases
+- [sveltejs/kit](https://github.com/sveltejs/kit) - Svelte application framework
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18.x or later
+- bun (recommended), npm, pnpm, or yarn
+
+### Installation
+
+1. Clone the repository
+   ```bash
+   git clone https://github.com/your-username/reposcoop.git
+   cd reposcoop
+   ```
+
+2. Install dependencies
+   ```bash
+   bun install
+   # or
+   npm install
+   # or
+   pnpm install
+   # or
+   yarn install
+   ```
+
+3. Install Playwright browsers (for E2E testing)
+   ```bash
+   bunx playwright install
+   # or
+   npx playwright install
+   ```
+
+### Development
+
+Start the development server:
 
 ```bash
-npm run dev
+bun run dev
 
 # or start the server and open the app in a new browser tab
-npm run dev -- --open
+bun run dev -- --open
 ```
 
-## Building
+### Testing
 
-To create a production version of your app:
+RepoScoop uses Vitest for unit tests and Playwright for E2E tests.
 
 ```bash
-npm run build
+# Run all tests
+bun test
+
+# Run only unit tests
+bun run test:unit
+
+# Run only E2E tests
+bun run test:e2e
 ```
 
-You can preview the production build with `npm run preview`.
+### Building for Production
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+Create a production build:
+
+```bash
+bun run build
+
+# Preview the production build
+bun run preview
+```
+
+## Deployment
+
+RepoScoop is configured to deploy to Cloudflare Pages using the `@sveltejs/adapter-cloudflare` adapter. No additional configuration is needed for basic deployment.
+
+## Project Structure
+
+```
+reposcoop/
+├── e2e/                # End-to-end tests using Playwright
+├── src/
+│   ├── lib/            # Library code
+│   │   ├── components/ # UI components
+│   │   └── utils/      # Utility functions
+│   ├── routes/         # SvelteKit routes
+│   │   ├── about/      # About page
+│   │   └── r/          # Repository view pages
+│   └── app.css         # Global styles
+├── docs/
+│   └── architecture/   # Architecture evaluations/ADRs
+└── static/             # Static assets
+```
+
+## Architecture & ADRs
+
+- GraphQL Evaluation: docs/architecture/graphql-evaluation.md
+
+## How It Works
+
+1. **Input**: User enters a GitHub repository URL
+2. **Fetching**: Application fetches release data from GitHub API
+3. **Processing**: Releases are grouped by package name using pattern detection
+4. **Display**: Grouped releases are displayed in a collapsible interface
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'feat: add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.

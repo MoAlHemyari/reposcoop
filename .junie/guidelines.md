@@ -9,12 +9,12 @@ This document provides essential information for developers working on the RepoS
 1. **Dependencies Installation**
 
    ```bash
-   # Install dependencies using npm
-   npm install
+   # Install dependencies using bun (recommended)
+   bun install
 
    # Or using other package managers
+   npm install
    pnpm install
-   bun install
    ```
 
 2. **Playwright Browser Installation**
@@ -22,6 +22,8 @@ This document provides essential information for developers working on the RepoS
    The project uses Playwright for browser testing. You need to install the browsers:
 
    ```bash
+   bunx playwright install
+   # or
    npx playwright install
    ```
 
@@ -30,10 +32,10 @@ This document provides essential information for developers working on the RepoS
 Start the development server:
 
 ```bash
-npm run dev
+bun run dev
 
 # Open in browser automatically
-npm run dev -- --open
+bun run dev -- --open
 ```
 
 ### Production Build
@@ -41,10 +43,10 @@ npm run dev -- --open
 Create a production build:
 
 ```bash
-npm run build
+bun run build
 
 # Preview the production build
-npm run preview
+bun run preview
 ```
 
 ### Deployment
@@ -62,16 +64,16 @@ The project uses two testing frameworks:
 
 ```bash
 # Run all tests (unit and e2e)
-npm test
+bun test
 
 # Run only unit tests
-npm run test:unit
+bun run test:unit
 
 # Run only e2e tests
-npm run test:e2e
+bun run test:e2e
 
 # Run specific test file
-npm run test:unit -- --run src/path/to/test.ts
+bun run test:unit -- --run src/path/to/test.ts
 ```
 
 ### Unit and Component Testing
@@ -160,11 +162,11 @@ test('home page has expected heading', async ({ page }) => {
 ### Code Quality Tools
 
 - **ESLint**: For linting JavaScript/TypeScript
-  - Run with `npm run lint`
+  - Run with `bun run lint`
 - **Prettier**: For code formatting
-  - Run with `npm run format`
+  - Run with `bun run format`
 - **TypeScript**: For type checking
-  - Run with `npm run check`
+  - Run with `bun run check`
 
 ### Project Structure
 

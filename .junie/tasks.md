@@ -9,56 +9,56 @@ This document contains a detailed checklist of actionable tasks for implementing
 2. [x] Install and configure TailwindCSS with required plugins (@tailwindcss/forms, @tailwindcss/typography)
 3. [x] Set up shadcn-svelte for UI components
 4. [x] Configure Cloudflare adapter for deployment
-5. [ ] Create basic routing structure (/home, /r/:owner/:repo, /about)
+5. [x] Create basic routing structure (/home, /r/:owner/:repo, /about)
 6. [x] Set up Vitest for unit testing
 7. [x] Configure Playwright for E2E testing
-8. [ ] Create initial project documentation
+8. [x] Create initial project documentation
 
 ### Repository Input
-9. [ ] Design and implement home page layout
-10. [ ] Create repository URL input component with validation
-11. [ ] Implement URL parsing to extract owner and repository name
-12. [ ] Add error handling for invalid repository URLs
-13. [ ] Create navigation mechanism to repository view page
-14. [ ] Add loading state for form submission
-15. [ ] Implement recently viewed repositories feature (local storage)
-16. [ ] Add unit tests for URL parsing and validation
+9. [x] Design and implement home page layout
+10. [x] Create repository URL input component with validation
+11. [x] Implement URL parsing to extract owner and repository name
+12. [x] Add error handling for invalid repository URLs
+13. [x] Create navigation mechanism to repository view page
+14. [x] Add loading state for form submission
+15. [x] Implement recently viewed repositories feature (local storage)
+16. [x] Add unit tests for URL parsing and validation
 
 ### GitHub API Integration
-17. [ ] Create GitHub API service module
-18. [ ] Implement fetch function for repository releases
-19. [ ] Add pagination support for repositories with many releases
-20. [ ] Implement error handling for API rate limits
-21. [ ] Create loading states for API requests
-22. [ ] Add retry mechanism for failed requests
+17. [x] Create GitHub API service module
+18. [x] Implement fetch function for repository releases
+19. [x] Add pagination support for repositories with many releases
+20. [x] Implement error handling for API rate limits
+21. [x] Create loading states for API requests
+22. [x] Add retry mechanism for failed requests
 23. [ ] Implement client-side caching of API responses
-24. [ ] Set up example data for development and testing without hitting API rate limits
-25. [ ] Write unit tests for API integration
+24. [x] Set up example data for development and testing without hitting API rate limits
+25. [x] Write unit tests for API integration
 
 ### Release Grouping Logic
-26. [ ] Develop algorithm to detect package names from release titles
-27. [ ] Implement function to group releases by package name
-28. [ ] Create sorting mechanism for packages (alphabetical)
-29. [ ] Implement sorting for releases within packages (by version/date)
-30. [ ] Handle edge cases (releases without clear package names)
-31. [ ] Create data structure for grouped releases
-32. [ ] Add unit tests for grouping and sorting algorithms
+26. [x] Develop algorithm to detect package names from release titles
+27. [x] Implement function to group releases by package name
+28. [x] Create sorting mechanism for packages (alphabetical)
+29. [x] Implement sorting for releases within packages (by version/date)
+30. [x] Handle edge cases (releases without clear package names)
+31. [x] Create data structure for grouped releases
+32. [x] Add unit tests for grouping and sorting algorithms
 
 ### Basic UI Implementation
-33. [ ] Create main layout component with responsive design
-34. [ ] Implement collapsible package group component
-35. [ ] Design and implement release item display
-36. [ ] Add Markdown rendering for release notes
-37. [ ] Implement responsive design for mobile and desktop
-38. [ ] Create loading and error state components
-39. [ ] Add basic animations for UI interactions
-40. [ ] Implement accessibility features (keyboard navigation, ARIA attributes)
-41. [ ] Write component tests for UI elements
+33. [x] Create main layout component with responsive design
+34. [x] Implement collapsible package group component
+35. [x] Design and implement release item display
+36. [x] Add Markdown rendering for release notes
+37. [x] Implement responsive design for mobile and desktop
+38. [x] Create loading and error state components
+39. [x] Add basic animations for UI interactions
+40. [x] Implement accessibility features (keyboard navigation, ARIA attributes)
+41. [x] Write component tests for UI elements
 
 ## Phase 2: Enhanced User Experience
 
 ### Advanced UI Features
-42. [ ] Implement collapsible release notes with toggle
+42. [x] Implement collapsible release notes with toggle
 43. [ ] Add syntax highlighting for code blocks in release notes
 44. [ ] Create filtering system for packages
 45. [ ] Implement search functionality across releases
