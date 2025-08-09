@@ -87,6 +87,8 @@ bun run test:e2e
 
 ### Commit Messages
 
+Always commit after each task is finished to keep changes atomic and reviewable.
+
 We follow the [Conventional Commits](https://www.conventionalcommits.org/) specification:
 
 ```

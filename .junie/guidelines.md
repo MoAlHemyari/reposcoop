@@ -180,3 +180,8 @@ test('home page has expected heading', async ({ page }) => {
 - Component files use PascalCase
 - Route files use the SvelteKit convention (+page.svelte, +layout.svelte)
 - Tests are co-located with the files they test
+
+## Assistant Workflow and Commits
+
+- Always commit after each task is finished to keep changes atomic and reviewable.
+- Once the user is satisfied with a task, they will send a message containing "done". After receiving "done", commit the changes immediately.
