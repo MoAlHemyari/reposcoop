@@ -78,9 +78,9 @@
 		}
 	}
 
-	function tryExampleRepo(repo: string) {
+	function tryExampleRepo(event: Event, repo: string) {
 		repoUrl = `https://github.com/${repo}`;
-		handleSubmit();
+		handleSubmit(event);
 	}
 
 	function viewRecentRepo(repo) {
@@ -198,7 +198,7 @@
 					<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
 						{#each exampleRepos as repo}
 							<button
-								onclick={() => tryExampleRepo(repo.name)}
+								onclick={(e) => tryExampleRepo(e, repo.name)}
 								class="p-4 border rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors text-left"
 							>
 								<div class="font-medium">{repo.name}</div>
