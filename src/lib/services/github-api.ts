@@ -159,6 +159,27 @@ export class GitHubApiProvider implements RepoApiProvider {
 			}
 		}
 
+		// Support react example in development
+		if (owner === 'facebook' && repo === 'react') {
+			try {
+				const page1Url = '/examples/github/facebook/react/page1.json?url';
+				const response = await fetch(page1Url);
+				const page1 = await response.json();
+				const allReleases = [...page1];
+				return {
+					releases: allReleases,
+					meta: {
+						rateLimit: { limit: 60, remaining: 60, reset: 0 },
+						lastPage: 1,
+						totalCount: allReleases.length
+					}
+				};
+			} catch (error) {
+				console.error('Failed to load example data for facebook/react:', error);
+				return null;
+			}
+		}
+
 		return null;
 	}
 
