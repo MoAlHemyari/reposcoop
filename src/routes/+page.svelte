@@ -3,6 +3,7 @@
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import { parseGitHubUrl, formatGitHubUrl } from '$lib/utils/github';
+    import { formatDistanceToNow } from "date-fns";
 
 	let repoUrl = $state('');
 	let isLoading = $state(false);
@@ -86,27 +87,6 @@
 	function viewRecentRepo(repo) {
 		goto(`/r/${repo.owner}/${repo.repo}`);
 	}
-
-	// Format relative time for recent repos
-	function formatRelativeTime(timestamp) {
-		const date = new Date(timestamp);
-		const now = new Date();
-		const diffMs = now.getTime() - date.getTime();
-		const diffSecs = Math.floor(diffMs / 1000);
-		const diffMins = Math.floor(diffSecs / 60);
-		const diffHours = Math.floor(diffMins / 60);
-		const diffDays = Math.floor(diffHours / 24);
-
-		if (diffDays > 0) {
-			return diffDays === 1 ? '1 day ago' : `${diffDays} days ago`;
-		} else if (diffHours > 0) {
-			return diffHours === 1 ? '1 hour ago' : `${diffHours} hours ago`;
-		} else if (diffMins > 0) {
-			return diffMins === 1 ? '1 minute ago' : `${diffMins} minutes ago`;
-		} else {
-			return 'just now';
-		}
-	}
 </script>
 
 <div class="min-h-screen flex flex-col">
@@ -180,7 +160,7 @@
 									<div>
 										<div class="font-medium">{repo.fullName}</div>
 										<div class="text-xs text-gray-500 dark:text-gray-400 mt-1">
-											Viewed {formatRelativeTime(repo.timestamp)}
+											Viewed {formatDistanceToNow(repo.timestamp)}
 										</div>
 									</div>
 									<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
