@@ -2,27 +2,39 @@
 	import { Button } from '$lib/components/ui/button';
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
-	import { parseGitHubUrl, formatGitHubUrl } from '$lib/utils/github';
-    import { formatDistanceToNow } from "date-fns";
+	import { parseGitHubUrl } from '$lib/utils/github';
+	import { formatDistanceToNow } from 'date-fns';
 
-	let repoUrl = $state('');
-	let isLoading = $state(false);
-	let validationError = $state('');
-	let recentRepos = $state([]);
+	type RecentRepo = {
+		owner: string;
+		repo: string;
+		fullName: string;
+		timestamp: string; // ISO string
+	};
+
+	type ExampleRepo = {
+		name: string;
+		description: string;
+	};
+
+	let repoUrl = $state<string>('');
+	let isLoading = $state<boolean>(false);
+	let validationError = $state<string>('');
+	let recentRepos = $state<RecentRepo[]>([]);
 
 	// Example repositories to try
-	const exampleRepos = [
+	const exampleRepos: ExampleRepo[] = [
 		{ name: 'clerk/javascript', description: 'Authentication library with multiple packages' },
 		{ name: 'vercel/next.js', description: 'React framework with many releases' },
 		{ name: 'sveltejs/kit', description: 'Svelte application framework' }
 	];
 
 	// Load recently viewed repositories from localStorage on component mount
-	onMount(() => {
+	onMount((): void => {
 		try {
 			const storedRepos = localStorage.getItem('recentRepos');
 			if (storedRepos) {
-				recentRepos = JSON.parse(storedRepos);
+				recentRepos = JSON.parse(storedRepos) as RecentRepo[];
 			}
 		} catch (error) {
 			console.error('Error loading recent repositories:', error);
@@ -30,10 +42,10 @@
 	});
 
 	// Save a repository to recently viewed
-	function saveToRecentRepos(owner, repo) {
+	function saveToRecentRepos(owner: string, repo: string): void {
 		try {
 			// Create new repo object
-			const newRepo = {
+			const newRepo: RecentRepo = {
 				owner,
 				repo,
 				fullName: `${owner}/${repo}`,
@@ -44,7 +56,7 @@
 			// Filter out any duplicates of the same repo
 			recentRepos = [
 				newRepo,
-				...recentRepos.filter(r => r.fullName !== newRepo.fullName)
+				...recentRepos.filter((r) => r.fullName !== newRepo.fullName)
 			].slice(0, 5); // Keep only the 5 most recent
 
 			// Save to localStorage
@@ -54,8 +66,8 @@
 		}
 	}
 
-	function handleSubmit(event: Event) {
-        event.preventDefault();
+	function handleSubmit(event: Event): void {
+		event.preventDefault();
 		// Reset validation error
 		validationError = '';
 
@@ -79,12 +91,12 @@
 		}
 	}
 
-	function tryExampleRepo(event: Event, repo: string) {
+	function tryExampleRepo(event: Event, repo: string): void {
 		repoUrl = `https://github.com/${repo}`;
 		handleSubmit(event);
 	}
 
-	function viewRecentRepo(repo) {
+	function viewRecentRepo(repo: RecentRepo): void {
 		goto(`/r/${repo.owner}/${repo.repo}`);
 	}
 </script>
@@ -160,7 +172,7 @@
 									<div>
 										<div class="font-medium">{repo.fullName}</div>
 										<div class="text-xs text-gray-500 dark:text-gray-400 mt-1">
-											Viewed {formatDistanceToNow(repo.timestamp)}
+ 										Viewed {formatDistanceToNow(new Date(repo.timestamp))}
 										</div>
 									</div>
 									<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
