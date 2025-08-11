@@ -1,416 +1,30 @@
 {
   "groups": [
     {
-      "name": "19.1.1",
+      "name": "react",
       "releases": [
-          {
-          "id": 32582830,
+        {
+          "id": 235675451,
           "url": "",
           "html_url": "",
-          "tag_name": "0.14.10",
-          "name": "0.14.10 (October 14, 2020)",
+          "tag_name": "v19.1.1",
+          "name": "19.1.1 (July 28, 2025)",
           "draft": false,
           "prerelease": false,
-          "created_at": "2020-10-14T19:32:49Z",
-          "published_at": "2020-10-14T19:57:50Z",
+          "created_at": "2025-07-28T15:00:14Z",
+          "published_at": "2025-07-28T15:04:10Z",
           "body": "",
           "author": {
             "login": "",
             "avatar_url": "",
             "html_url": ""
           },
-          "packageName": "0.14.10",
-          "version": "(October 14, 2020)",
-          "sortKey": "2020-10-14T19:57:50Z",
+          "packageName": "19.1.1",
+          "version": "(July 28, 2025)",
+          "sortKey": "2025-07-28T15:04:10Z",
           "notesExpanded": false
         },
-         {
-          "id": 32582810,
-          "url": "",
-          "html_url": "",
-          "tag_name": "v15.7.0",
-          "name": "15.7.0 (October 14, 2020)",
-          "draft": false,
-          "prerelease": false,
-          "created_at": "2020-10-14T19:32:49Z",
-          "published_at": "2020-10-14T19:57:17Z",
-          "body": "",
-          "author": {
-            "login": "",
-            "avatar_url": "",
-            "html_url": ""
-          },
-          "packageName": "15.7.0",
-          "version": "(October 14, 2020)",
-          "sortKey": "2020-10-14T19:57:17Z",
-          "notesExpanded": false
-        },
-         {
-          "id": 20319382,
-          "url": "",
-          "html_url": "",
-          "tag_name": "v16.10.0",
-          "name": "16.10.0 (September 27, 2019)",
-          "draft": false,
-          "prerelease": false,
-          "created_at": "2019-09-27T20:30:53Z",
-          "published_at": "2019-09-27T20:36:53Z",
-          "body": "",
-          "author": {
-            "login": "",
-            "avatar_url": "",
-            "html_url": ""
-          },
-          "packageName": "16.10.0",
-          "version": "(September 27, 2019)",
-          "sortKey": "2019-09-27T20:36:53Z",
-          "notesExpanded": false
-        },
-              {
-          "id": 20328436,
-          "url": "",
-          "html_url": "",
-          "tag_name": "v16.10.1",
-          "name": "16.10.1 (September 28, 2019)",
-          "draft": false,
-          "prerelease": false,
-          "created_at": "2019-09-28T18:19:51Z",
-          "published_at": "2019-09-28T18:25:25Z",
-          "body": "",
-          "author": {
-            "login": "",
-            "avatar_url": "",
-            "html_url": ""
-          },
-          "packageName": "16.10.1",
-          "version": "(September 28, 2019)",
-          "sortKey": "2019-09-28T18:25:25Z",
-          "notesExpanded": false
-        },     {
-          "id": 20459276,
-          "url": "",
-          "html_url": "",
-          "tag_name": "v16.10.2",
-          "name": "16.10.2 (October 3, 2019)",
-          "draft": false,
-          "prerelease": false,
-          "created_at": "2019-10-03T21:17:21Z",
-          "published_at": "2019-10-03T21:18:44Z",
-          "body": "",
-          "author": {
-            "login": "",
-            "avatar_url": "",
-            "html_url": ""
-          },
-          "packageName": "16.10.2",
-          "version": "(October 3, 2019)",
-          "sortKey": "2019-10-03T21:18:44Z",
-          "notesExpanded": false
-        },
-         {
-          "id": 20897423,
-          "url": "",
-          "html_url": "",
-          "tag_name": "v16.11.0",
-          "name": "16.11.0 (October 22, 2019)",
-          "draft": false,
-          "prerelease": false,
-          "created_at": "2019-10-22T21:32:41Z",
-          "published_at": "2019-10-22T21:37:39Z",
-          "body": "",
-          "author": {
-            "login": "",
-            "avatar_url": "",
-            "html_url": ""
-          },
-          "packageName": "16.11.0",
-          "version": "(October 22, 2019)",
-          "sortKey": "2019-10-22T21:37:39Z",
-          "notesExpanded": false
-        },        {
-          "id": 21492536,
-          "url": "",
-          "html_url": "",
-          "tag_name": "v16.12.0",
-          "name": "16.12.0 (November 14, 2019)",
-          "draft": false,
-          "prerelease": false,
-          "created_at": "2019-11-15T00:05:24Z",
-          "published_at": "2019-11-15T00:12:04Z",
-          "body": "",
-          "author": {
-            "login": "",
-            "avatar_url": "",
-            "html_url": ""
-          },
-          "packageName": "16.12.0",
-          "version": "(November 14, 2019)",
-          "sortKey": "2019-11-15T00:12:04Z",
-          "notesExpanded": false
-        },      {
-          "id": 24016842,
-          "url": "",
-          "html_url": "",
-          "tag_name": "v16.13.0",
-          "name": "16.13.0 (February 26, 2020)",
-          "draft": false,
-          "prerelease": false,
-          "created_at": "2020-02-26T20:33:29Z",
-          "published_at": "2020-02-26T20:39:13Z",
-          "body": "",
-          "author": {
-            "login": "",
-            "avatar_url": "",
-            "html_url": ""
-          },
-          "packageName": "16.13.0",
-          "version": "(February 26, 2020)",
-          "sortKey": "2020-02-26T20:39:13Z",
-          "notesExpanded": false
-        },
-          {
-          "id": 24688601,
-          "url": "",
-          "html_url": "",
-          "tag_name": "v16.13.1",
-          "name": "16.13.1 (March 19, 2020)",
-          "draft": false,
-          "prerelease": false,
-          "created_at": "2020-03-19T20:02:31Z",
-          "published_at": "2020-03-19T20:29:38Z",
-          "body": "",
-          "author": {
-            "login": "",
-            "avatar_url": "",
-            "html_url": ""
-          },
-          "packageName": "16.13.1",
-          "version": "(March 19, 2020)",
-          "sortKey": "2020-03-19T20:29:38Z",
-          "notesExpanded": false
-        }, {
-          "id": 32582860,
-          "url": "",
-          "html_url": "",
-          "tag_name": "v16.14.0",
-          "name": "16.14.0 (October 14, 2020)",
-          "draft": false,
-          "prerelease": false,
-          "created_at": "2020-10-14T19:32:49Z",
-          "published_at": "2020-10-14T19:58:32Z",
-          "body": "",
-          "author": {
-            "login": "",
-            "avatar_url": "",
-            "html_url": ""
-          },
-          "packageName": "16.14.0",
-          "version": "(October 14, 2020)",
-          "sortKey": "2020-10-14T19:58:32Z",
-          "notesExpanded": false
-        },
-                {
-          "id": 19177438,
-          "url": "",
-          "html_url": "",
-          "tag_name": "v16.9.0",
-          "name": "16.9.0 (August 8, 2019)",
-          "draft": false,
-          "prerelease": false,
-          "created_at": "2019-08-08T21:10:58Z",
-          "published_at": "2019-08-08T21:14:59Z",
-          "body": "",
-          "author": {
-            "login": "",
-            "avatar_url": "",
-            "html_url": ""
-          },
-          "packageName": "16.9.0",
-          "version": "(August 8, 2019)",
-          "sortKey": "2019-08-08T21:14:59Z",
-          "notesExpanded": false
-        },        {
-          "id": 32833064,
-          "url": "",
-          "html_url": "",
-          "tag_name": "v17.0.0",
-          "name": "17.0.0 (October 20, 2020)",
-          "draft": false,
-          "prerelease": false,
-          "created_at": "2020-10-20T20:33:44Z",
-          "published_at": "2020-10-20T20:45:11Z",
-          "body": "",
-          "author": {
-            "login": "",
-            "avatar_url": "",
-            "html_url": ""
-          },
-          "packageName": "17.0.0",
-          "version": "(October 20, 2020)",
-          "sortKey": "2020-10-20T20:45:11Z",
-          "notesExpanded": false
-        },     {
-          "id": 40190044,
-          "url": "",
-          "html_url": "",
-          "tag_name": "v17.0.1",
-          "name": "17.0.1 (October 22, 2020)",
-          "draft": false,
-          "prerelease": false,
-          "created_at": "2020-10-22T12:23:27Z",
-          "published_at": "2021-03-22T21:59:46Z",
-          "body": "",
-          "author": {
-            "login": "",
-            "avatar_url": "",
-            "html_url": ""
-          },
-          "packageName": "17.0.1",
-          "version": "(October 22, 2020)",
-          "sortKey": "2021-03-22T21:59:46Z",
-          "notesExpanded": false
-        },        {
-          "id": 40190065,
-          "url": "",
-          "html_url": "",
-          "tag_name": "v17.0.2",
-          "name": "17.0.2 (March 22, 2021)",
-          "draft": false,
-          "prerelease": false,
-          "created_at": "2021-03-22T20:01:35Z",
-          "published_at": "2021-03-22T22:00:26Z",
-          "body": "",
-          "author": {
-            "login": "",
-            "avatar_url": "",
-            "html_url": ""
-          },
-          "packageName": "17.0.2",
-          "version": "(March 22, 2021)",
-          "sortKey": "2021-03-22T22:00:26Z",
-          "notesExpanded": false
-        },        {
-          "id": 63062908,
-          "url": "",
-          "html_url": "",
-          "tag_name": "v18.0.0",
-          "name": "18.0.0 (March 29, 2022)",
-          "draft": false,
-          "prerelease": false,
-          "created_at": "2022-03-29T17:17:00Z",
-          "published_at": "2022-03-29T17:22:34Z",
-          "body": "",
-          "author": {
-            "login": "",
-            "avatar_url": "",
-            "html_url": ""
-          },
-          "packageName": "18.0.0",
-          "version": "(March 29, 2022)",
-          "sortKey": "2022-03-29T17:22:34Z",
-          "notesExpanded": false
-        },      {
-          "id": 65406837,
-          "url": "",
-          "html_url": "",
-          "tag_name": "v18.1.0",
-          "name": "18.1.0 (April 26, 2022)",
-          "draft": false,
-          "prerelease": false,
-          "created_at": "2022-04-26T21:13:49Z",
-          "published_at": "2022-04-26T21:15:00Z",
-          "body": "",
-          "author": {
-            "login": "",
-            "avatar_url": "",
-            "html_url": ""
-          },
-          "packageName": "18.1.0",
-          "version": "(April 26, 2022)",
-          "sortKey": "2022-04-26T21:15:00Z",
-          "notesExpanded": false
-        },     {
-          "id": 69439453,
-          "url": "",
-          "html_url": "",
-          "tag_name": "v18.2.0",
-          "name": "18.2.0 (June 14, 2022)",
-          "draft": false,
-          "prerelease": false,
-          "created_at": "2022-06-14T19:51:27Z",
-          "published_at": "2022-06-14T19:54:21Z",
-          "body": "",
-          "author": {
-            "login": "",
-            "avatar_url": "",
-            "html_url": ""
-          },
-          "packageName": "18.2.0",
-          "version": "(June 14, 2022)",
-          "sortKey": "2022-06-14T19:54:21Z",
-          "notesExpanded": false
-        },        {
-          "id": 153048806,
-          "url": "",
-          "html_url": "",
-          "tag_name": "v18.3.0",
-          "name": "18.3.0 (April 25, 2024)",
-          "draft": false,
-          "prerelease": false,
-          "created_at": "2024-04-25T16:22:01Z",
-          "published_at": "2024-04-26T19:48:51Z",
-          "body": "",
-          "author": {
-            "login": "",
-            "avatar_url": "",
-            "html_url": ""
-          },
-          "packageName": "18.3.0",
-          "version": "(April 25, 2024)",
-          "sortKey": "2024-04-26T19:48:51Z",
-          "notesExpanded": false
-        },        {
-          "id": 153049289,
-          "url": "",
-          "html_url": "",
-          "tag_name": "v18.3.1",
-          "name": "18.3.1 (April 26, 2024)",
-          "draft": false,
-          "prerelease": false,
-          "created_at": "2024-04-26T16:17:57Z",
-          "published_at": "2024-04-26T19:53:42Z",
-          "body": "",
-          "author": {
-            "login": "",
-            "avatar_url": "",
-            "html_url": ""
-          },
-          "packageName": "18.3.1",
-          "version": "(April 26, 2024)",
-          "sortKey": "2024-04-26T19:53:42Z",
-          "notesExpanded": false
-        },        {
-          "id": 189276068,
-          "url": "",
-          "html_url": "",
-          "tag_name": "v19.0.0",
-          "name": "19.0.0 (December 5, 2024)",
-          "draft": false,
-          "prerelease": false,
-          "created_at": "2024-11-14T16:48:33Z",
-          "published_at": "2024-12-05T21:05:14Z",
-          "body": "",
-          "author": {
-            "login": "",
-            "avatar_url": "",
-            "html_url": ""
-          },
-          "packageName": "19.0.0",
-          "version": "(December 5, 2024)",
-          "sortKey": "2024-12-05T21:05:14Z",
-          "notesExpanded": false
-        },
-                {
+        {
           "id": 209064653,
           "url": "",
           "html_url": "",
@@ -432,24 +46,423 @@
           "notesExpanded": false
         },
         {
-          "id": 235675451,
+          "id": 189276068,
           "url": "",
           "html_url": "",
-          "tag_name": "v19.1.1",
-          "name": "19.1.1 (July 28, 2025)",
+          "tag_name": "v19.0.0",
+          "name": "19.0.0 (December 5, 2024)",
           "draft": false,
           "prerelease": false,
-          "created_at": "2025-07-28T15:00:14Z",
-          "published_at": "2025-07-28T15:04:10Z",
+          "created_at": "2024-11-14T16:48:33Z",
+          "published_at": "2024-12-05T21:05:14Z",
           "body": "",
           "author": {
             "login": "",
             "avatar_url": "",
             "html_url": ""
           },
-          "packageName": "19.1.1",
-          "version": "(July 28, 2025)",
-          "sortKey": "2025-07-28T15:04:10Z",
+          "packageName": "19.0.0",
+          "version": "(December 5, 2024)",
+          "sortKey": "2024-12-05T21:05:14Z",
+          "notesExpanded": false
+        },
+        {
+          "id": 153049289,
+          "url": "",
+          "html_url": "",
+          "tag_name": "v18.3.1",
+          "name": "18.3.1 (April 26, 2024)",
+          "draft": false,
+          "prerelease": false,
+          "created_at": "2024-04-26T16:17:57Z",
+          "published_at": "2024-04-26T19:53:42Z",
+          "body": "",
+          "author": {
+            "login": "",
+            "avatar_url": "",
+            "html_url": ""
+          },
+          "packageName": "18.3.1",
+          "version": "(April 26, 2024)",
+          "sortKey": "2024-04-26T19:53:42Z",
+          "notesExpanded": false
+        },
+        {
+          "id": 153048806,
+          "url": "",
+          "html_url": "",
+          "tag_name": "v18.3.0",
+          "name": "18.3.0 (April 25, 2024)",
+          "draft": false,
+          "prerelease": false,
+          "created_at": "2024-04-25T16:22:01Z",
+          "published_at": "2024-04-26T19:48:51Z",
+          "body": "",
+          "author": {
+            "login": "",
+            "avatar_url": "",
+            "html_url": ""
+          },
+          "packageName": "18.3.0",
+          "version": "(April 25, 2024)",
+          "sortKey": "2024-04-26T19:48:51Z",
+          "notesExpanded": false
+        },
+        {
+          "id": 69439453,
+          "url": "",
+          "html_url": "",
+          "tag_name": "v18.2.0",
+          "name": "18.2.0 (June 14, 2022)",
+          "draft": false,
+          "prerelease": false,
+          "created_at": "2022-06-14T19:51:27Z",
+          "published_at": "2022-06-14T19:54:21Z",
+          "body": "",
+          "author": {
+            "login": "",
+            "avatar_url": "",
+            "html_url": ""
+          },
+          "packageName": "18.2.0",
+          "version": "(June 14, 2022)",
+          "sortKey": "2022-06-14T19:54:21Z",
+          "notesExpanded": false
+        },
+        {
+          "id": 65406837,
+          "url": "",
+          "html_url": "",
+          "tag_name": "v18.1.0",
+          "name": "18.1.0 (April 26, 2022)",
+          "draft": false,
+          "prerelease": false,
+          "created_at": "2022-04-26T21:13:49Z",
+          "published_at": "2022-04-26T21:15:00Z",
+          "body": "",
+          "author": {
+            "login": "",
+            "avatar_url": "",
+            "html_url": ""
+          },
+          "packageName": "18.1.0",
+          "version": "(April 26, 2022)",
+          "sortKey": "2022-04-26T21:15:00Z",
+          "notesExpanded": false
+        },
+        {
+          "id": 63062908,
+          "url": "",
+          "html_url": "",
+          "tag_name": "v18.0.0",
+          "name": "18.0.0 (March 29, 2022)",
+          "draft": false,
+          "prerelease": false,
+          "created_at": "2022-03-29T17:17:00Z",
+          "published_at": "2022-03-29T17:22:34Z",
+          "body": "",
+          "author": {
+            "login": "",
+            "avatar_url": "",
+            "html_url": ""
+          },
+          "packageName": "18.0.0",
+          "version": "(March 29, 2022)",
+          "sortKey": "2022-03-29T17:22:34Z",
+          "notesExpanded": false
+        },
+        {
+          "id": 40190065,
+          "url": "",
+          "html_url": "",
+          "tag_name": "v17.0.2",
+          "name": "17.0.2 (March 22, 2021)",
+          "draft": false,
+          "prerelease": false,
+          "created_at": "2021-03-22T20:01:35Z",
+          "published_at": "2021-03-22T22:00:26Z",
+          "body": "",
+          "author": {
+            "login": "",
+            "avatar_url": "",
+            "html_url": ""
+          },
+          "packageName": "17.0.2",
+          "version": "(March 22, 2021)",
+          "sortKey": "2021-03-22T22:00:26Z",
+          "notesExpanded": false
+        },
+        {
+          "id": 40190044,
+          "url": "",
+          "html_url": "",
+          "tag_name": "v17.0.1",
+          "name": "17.0.1 (October 22, 2020)",
+          "draft": false,
+          "prerelease": false,
+          "created_at": "2020-10-22T12:23:27Z",
+          "published_at": "2021-03-22T21:59:46Z",
+          "body": "",
+          "author": {
+            "login": "",
+            "avatar_url": "",
+            "html_url": ""
+          },
+          "packageName": "17.0.1",
+          "version": "(October 22, 2020)",
+          "sortKey": "2021-03-22T21:59:46Z",
+          "notesExpanded": false
+        },
+        {
+          "id": 32833064,
+          "url": "",
+          "html_url": "",
+          "tag_name": "v17.0.0",
+          "name": "17.0.0 (October 20, 2020)",
+          "draft": false,
+          "prerelease": false,
+          "created_at": "2020-10-20T20:33:44Z",
+          "published_at": "2020-10-20T20:45:11Z",
+          "body": "",
+          "author": {
+            "login": "",
+            "avatar_url": "",
+            "html_url": ""
+          },
+          "packageName": "17.0.0",
+          "version": "(October 20, 2020)",
+          "sortKey": "2020-10-20T20:45:11Z",
+          "notesExpanded": false
+        },
+        {
+          "id": 32582860,
+          "url": "",
+          "html_url": "",
+          "tag_name": "v16.14.0",
+          "name": "16.14.0 (October 14, 2020)",
+          "draft": false,
+          "prerelease": false,
+          "created_at": "2020-10-14T19:32:49Z",
+          "published_at": "2020-10-14T19:58:32Z",
+          "body": "",
+          "author": {
+            "login": "",
+            "avatar_url": "",
+            "html_url": ""
+          },
+          "packageName": "16.14.0",
+          "version": "(October 14, 2020)",
+          "sortKey": "2020-10-14T19:58:32Z",
+          "notesExpanded": false
+        },
+        {
+          "id": 32582830,
+          "url": "",
+          "html_url": "",
+          "tag_name": "0.14.10",
+          "name": "0.14.10 (October 14, 2020)",
+          "draft": false,
+          "prerelease": false,
+          "created_at": "2020-10-14T19:32:49Z",
+          "published_at": "2020-10-14T19:57:50Z",
+          "body": "",
+          "author": {
+            "login": "",
+            "avatar_url": "",
+            "html_url": ""
+          },
+          "packageName": "0.14.10",
+          "version": "(October 14, 2020)",
+          "sortKey": "2020-10-14T19:57:50Z",
+          "notesExpanded": false
+        },
+        {
+          "id": 32582810,
+          "url": "",
+          "html_url": "",
+          "tag_name": "v15.7.0",
+          "name": "15.7.0 (October 14, 2020)",
+          "draft": false,
+          "prerelease": false,
+          "created_at": "2020-10-14T19:32:49Z",
+          "published_at": "2020-10-14T19:57:17Z",
+          "body": "",
+          "author": {
+            "login": "",
+            "avatar_url": "",
+            "html_url": ""
+          },
+          "packageName": "15.7.0",
+          "version": "(October 14, 2020)",
+          "sortKey": "2020-10-14T19:57:17Z",
+          "notesExpanded": false
+        },
+        {
+          "id": 24688601,
+          "url": "",
+          "html_url": "",
+          "tag_name": "v16.13.1",
+          "name": "16.13.1 (March 19, 2020)",
+          "draft": false,
+          "prerelease": false,
+          "created_at": "2020-03-19T20:02:31Z",
+          "published_at": "2020-03-19T20:29:38Z",
+          "body": "",
+          "author": {
+            "login": "",
+            "avatar_url": "",
+            "html_url": ""
+          },
+          "packageName": "16.13.1",
+          "version": "(March 19, 2020)",
+          "sortKey": "2020-03-19T20:29:38Z",
+          "notesExpanded": false
+        },
+        {
+          "id": 24016842,
+          "url": "",
+          "html_url": "",
+          "tag_name": "v16.13.0",
+          "name": "16.13.0 (February 26, 2020)",
+          "draft": false,
+          "prerelease": false,
+          "created_at": "2020-02-26T20:33:29Z",
+          "published_at": "2020-02-26T20:39:13Z",
+          "body": "",
+          "author": {
+            "login": "",
+            "avatar_url": "",
+            "html_url": ""
+          },
+          "packageName": "16.13.0",
+          "version": "(February 26, 2020)",
+          "sortKey": "2020-02-26T20:39:13Z",
+          "notesExpanded": false
+        },
+        {
+          "id": 21492536,
+          "url": "",
+          "html_url": "",
+          "tag_name": "v16.12.0",
+          "name": "16.12.0 (November 14, 2019)",
+          "draft": false,
+          "prerelease": false,
+          "created_at": "2019-11-15T00:05:24Z",
+          "published_at": "2019-11-15T00:12:04Z",
+          "body": "",
+          "author": {
+            "login": "",
+            "avatar_url": "",
+            "html_url": ""
+          },
+          "packageName": "16.12.0",
+          "version": "(November 14, 2019)",
+          "sortKey": "2019-11-15T00:12:04Z",
+          "notesExpanded": false
+        },
+        {
+          "id": 20897423,
+          "url": "",
+          "html_url": "",
+          "tag_name": "v16.11.0",
+          "name": "16.11.0 (October 22, 2019)",
+          "draft": false,
+          "prerelease": false,
+          "created_at": "2019-10-22T21:32:41Z",
+          "published_at": "2019-10-22T21:37:39Z",
+          "body": "",
+          "author": {
+            "login": "",
+            "avatar_url": "",
+            "html_url": ""
+          },
+          "packageName": "16.11.0",
+          "version": "(October 22, 2019)",
+          "sortKey": "2019-10-22T21:37:39Z",
+          "notesExpanded": false
+        },
+        {
+          "id": 20459276,
+          "url": "",
+          "html_url": "",
+          "tag_name": "v16.10.2",
+          "name": "16.10.2 (October 3, 2019)",
+          "draft": false,
+          "prerelease": false,
+          "created_at": "2019-10-03T21:17:21Z",
+          "published_at": "2019-10-03T21:18:44Z",
+          "body": "",
+          "author": {
+            "login": "",
+            "avatar_url": "",
+            "html_url": ""
+          },
+          "packageName": "16.10.2",
+          "version": "(October 3, 2019)",
+          "sortKey": "2019-10-03T21:18:44Z",
+          "notesExpanded": false
+        },
+        {
+          "id": 20328436,
+          "url": "",
+          "html_url": "",
+          "tag_name": "v16.10.1",
+          "name": "16.10.1 (September 28, 2019)",
+          "draft": false,
+          "prerelease": false,
+          "created_at": "2019-09-28T18:19:51Z",
+          "published_at": "2019-09-28T18:25:25Z",
+          "body": "",
+          "author": {
+            "login": "",
+            "avatar_url": "",
+            "html_url": ""
+          },
+          "packageName": "16.10.1",
+          "version": "(September 28, 2019)",
+          "sortKey": "2019-09-28T18:25:25Z",
+          "notesExpanded": false
+        },
+        {
+          "id": 20319382,
+          "url": "",
+          "html_url": "",
+          "tag_name": "v16.10.0",
+          "name": "16.10.0 (September 27, 2019)",
+          "draft": false,
+          "prerelease": false,
+          "created_at": "2019-09-27T20:30:53Z",
+          "published_at": "2019-09-27T20:36:53Z",
+          "body": "",
+          "author": {
+            "login": "",
+            "avatar_url": "",
+            "html_url": ""
+          },
+          "packageName": "16.10.0",
+          "version": "(September 27, 2019)",
+          "sortKey": "2019-09-27T20:36:53Z",
+          "notesExpanded": false
+        },
+        {
+          "id": 19177438,
+          "url": "",
+          "html_url": "",
+          "tag_name": "v16.9.0",
+          "name": "16.9.0 (August 8, 2019)",
+          "draft": false,
+          "prerelease": false,
+          "created_at": "2019-08-08T21:10:58Z",
+          "published_at": "2019-08-08T21:14:59Z",
+          "body": "",
+          "author": {
+            "login": "",
+            "avatar_url": "",
+            "html_url": ""
+          },
+          "packageName": "16.9.0",
+          "version": "(August 8, 2019)",
+          "sortKey": "2019-08-08T21:14:59Z",
           "notesExpanded": false
         },
         {
@@ -2091,7 +2104,7 @@
         "sortKey": "2025-07-28T15:04:10Z",
         "notesExpanded": false
       },
-      "releaseCount": 1,
+      "releaseCount": 99,
       "isExpanded": false
     },
     {
