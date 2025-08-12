@@ -71,7 +71,6 @@ async function main() {
     await Bun.write(outputPath, outputJson);
 
     console.log(`Grouped ${grouped.totalReleases} releases into ${grouped.groups.length} package group(s).`);
-    console.log(`Ungrouped count: ${grouped.ungrouped.length}`);
     console.log(`Output written to: ${outputPath}`);
   } catch (err) {
     console.error("Failed to process releases:", err);

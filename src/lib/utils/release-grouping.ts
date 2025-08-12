@@ -33,7 +33,6 @@ export interface PackageGroup {
  */
 export interface GroupedReleases {
 	groups: PackageGroup[];
-	ungrouped: GroupedRelease[];
 	totalReleases: number;
 }
 
@@ -109,8 +108,9 @@ export function extractPackageInfo(title: string): { packageName: string; versio
 	// If no pattern matches, try to extract from the first part of the title
 	const parts = title.split(/[\s-]/);
 	if (parts.length > 1) {
-		// Skip if the first part is "Version" or similar
-		if (parts[0].toLowerCase() === 'version' || parts[0].toLowerCase() === 'v') {
+		const first = parts[0];
+		// Treat version-like or generic 'Version' prefixes as default
+		if (first.toLowerCase() === 'version' || first.toLowerCase() === 'v' || /^\d+(?:\.\d+){1,3}$/.test(first)) {
 			return {
 				packageName: 'default',
 				version: title.replace(/^version\s+|^v\s+/i, '').trim()
@@ -119,8 +119,8 @@ export function extractPackageInfo(title: string): { packageName: string; versio
 
 		// Use the first part as the package name
 		return {
-			packageName: parts[0],
-			version: title.replace(parts[0], '').trim()
+			packageName: first,
+			version: title.replace(first, '').trim()
 		};
 	}
 
@@ -144,31 +144,16 @@ export function detectPackagePatterns(releases: Release[]): string[] {
 		const tagInfo = extractPackageInfo(release.tag_name);
 		const nameInfo = extractPackageInfo(release.name);
 
-		if (
-			tagInfo?.packageName &&
-			tagInfo.packageName !== 'default' &&
-			tagInfo.packageName.toLowerCase() !== 'version'
-		) {
+		if (tagInfo?.packageName && tagInfo.packageName !== 'default' && tagInfo.packageName.toLowerCase() !== 'version') {
 			patterns.add(tagInfo.packageName);
 		}
 
-		if (
-			nameInfo?.packageName &&
-			nameInfo.packageName !== 'default' &&
-			nameInfo.packageName.toLowerCase() !== 'version'
-		) {
+		if (nameInfo?.packageName && nameInfo.packageName !== 'default' && nameInfo.packageName.toLowerCase() !== 'version') {
 			patterns.add(nameInfo.packageName);
 		}
 	}
 
-	// Ensure we only return the expected package patterns for the test data
-	// This is a workaround to make the tests pass
-	const result = Array.from(patterns);
-	if (result.length > 5 && releases.some((r) => r.name === 'Version 6.0.0')) {
-		return result.filter((p) => p.toLowerCase() !== 'version');
-	}
-
-	return result;
+	return Array.from(patterns);
 }
 
 /**
@@ -177,17 +162,22 @@ export function detectPackagePatterns(releases: Release[]): string[] {
  * @param releases - Array of repository releases
  * @returns Grouped releases object
  */
-export function groupReleasesByPackage(releases: Release[]): GroupedReleases {
+export function groupReleasesByPackage(releases: Release[], repoName?: string): GroupedReleases {
 	// Detect package patterns in the repository
 	const packagePatterns = detectPackagePatterns(releases);
 
 	// Process each release
 	const groupedReleases: GroupedRelease[] = releases.map((release) => {
-		// Try to extract package info from tag name first, then from release name
+		// Try to extract package info from tag name first; fall back to release name only if tag is unusable
 		let packageInfo = extractPackageInfo(release.tag_name);
 
-		if (!packageInfo || packageInfo.packageName === 'default') {
+		if (!packageInfo) {
 			packageInfo = extractPackageInfo(release.name);
+		} else if (packageInfo.packageName === 'default') {
+			const nameInfo = extractPackageInfo(release.name);
+			if (nameInfo && nameInfo.packageName && nameInfo.packageName !== 'default' && nameInfo.packageName.toLowerCase() !== 'version') {
+				packageInfo = nameInfo;
+			}
 		}
 
 		// If still no package info, use default
@@ -210,60 +200,48 @@ export function groupReleasesByPackage(releases: Release[]): GroupedReleases {
 		};
 	});
 
-	// Group by package name
+	// Determine repo group name
+	const repoGroupName = repoName && repoName.trim().length > 0 ? repoName : 'repository';
+	// Consider patterns meaningful if there is at least one non-default release
+	const nonDefaultCount = groupedReleases.filter((r) => r.packageName && r.packageName !== 'default' && r.packageName.toLowerCase() !== 'version').length;
+	const hasPatterns = nonDefaultCount >= 1;
+
+	// Group by computed group key
 	const groupMap = new Map<string, GroupedRelease[]>();
 
 	for (const release of groupedReleases) {
-		let { packageName } = release;
-
-		// Treat "Version" as "default" for grouping
-		if (packageName.toLowerCase() === 'version') {
-			packageName = 'default';
+		let pkg = release.packageName;
+		if (pkg.toLowerCase() === 'version') {
+			pkg = 'default';
 			release.packageName = 'default';
 		}
 
-		if (!groupMap.has(packageName)) {
-			groupMap.set(packageName, []);
-		}
+		const groupKey = !hasPatterns || pkg === 'default' ? repoGroupName : release.packageName;
 
-		groupMap.get(packageName)!.push(release);
+		if (!groupMap.has(groupKey)) {
+			groupMap.set(groupKey, []);
+		}
+		groupMap.get(groupKey)!.push(release);
 	}
 
 	// Sort releases within each group by date (newest first)
-	for (const [packageName, releases] of groupMap.entries()) {
+	for (const [key, rels] of groupMap.entries()) {
 		groupMap.set(
-			packageName,
-			releases.sort((a, b) => new Date(b.sortKey).getTime() - new Date(a.sortKey).getTime())
+			key,
+			rels.sort((a, b) => new Date(b.sortKey).getTime() - new Date(a.sortKey).getTime())
 		);
 	}
 
-	// Create package groups
+	// Create package groups from map entries
 	const groups: PackageGroup[] = [];
-	let ungrouped: GroupedRelease[] = [];
-
-	for (const [packageName, releases] of groupMap.entries()) {
-		if (packageName === 'default') {
-			ungrouped = releases;
-		} else {
-			groups.push({
-				name: packageName,
-				releases,
-				latestRelease: releases[0],
-				releaseCount: releases.length,
-				isExpanded: false
-			});
-		}
-	}
-
-	// Special case for tests: ensure we have exactly 5 groups if this is the test data
-	if (groups.length > 5 && groupedReleases.some((r) => r.name === 'Version 6.0.0')) {
-		const versionGroup = groups.find((g) => g.name.toLowerCase() === 'version');
-		if (versionGroup) {
-			// Move Version group releases to ungrouped
-			ungrouped = [...ungrouped, ...versionGroup.releases];
-			// Remove Version group
-			groups.splice(groups.indexOf(versionGroup), 1);
-		}
+	for (const [name, rels] of groupMap.entries()) {
+		groups.push({
+			name,
+			releases: rels,
+			latestRelease: rels[0],
+			releaseCount: rels.length,
+			isExpanded: false
+		});
 	}
 
 	// Sort groups alphabetically by name
@@ -271,7 +249,6 @@ export function groupReleasesByPackage(releases: Release[]): GroupedReleases {
 
 	return {
 		groups,
-		ungrouped,
 		totalReleases: groupedReleases.length
 	};
 }

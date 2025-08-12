@@ -209,12 +209,11 @@ describe('Release Grouping Utilities', () => {
 	});
 
 	describe('groupReleasesByPackage', () => {
-		it('should group releases by package name', () => {
-			const result = groupReleasesByPackage(mockReleases);
+		it('should group releases by package name and put default ones under repo group', () => {
+			const result = groupReleasesByPackage(mockReleases as any, 'repo');
 
-			// Should have 5 package groups and 1 ungrouped release
-			expect(result.groups.length).toBe(5);
-			expect(result.ungrouped.length).toBe(1);
+			// Should have 6 groups: 5 package groups + 1 repo group holding the default/version release
+			expect(result.groups.length).toBe(6);
 
 			// Should have correct total count
 			expect(result.totalReleases).toBe(7);
@@ -227,10 +226,14 @@ describe('Release Grouping Utilities', () => {
 			const packageB = result.groups.find((g) => g.name === 'package-b');
 			expect(packageB).toBeDefined();
 			expect(packageB?.releases.length).toBe(1);
+
+			const repoGroup = result.groups.find((g) => g.name === 'repo');
+			expect(repoGroup).toBeDefined();
+			expect(repoGroup?.releases.length).toBe(1);
 		});
 
 		it('should sort releases within groups by date (newest first)', () => {
-			const result = groupReleasesByPackage(mockReleases);
+			const result = groupReleasesByPackage(mockReleases as any, 'repo');
 
 			// Get package-a group which has multiple releases
 			const packageA = result.groups.find((g) => g.name === '@scope/package-a');
@@ -244,10 +247,9 @@ describe('Release Grouping Utilities', () => {
 		});
 
 		it('should handle empty releases array', () => {
-			const result = groupReleasesByPackage([]);
+			const result = groupReleasesByPackage([], 'repo');
 
 			expect(result.groups).toEqual([]);
-			expect(result.ungrouped).toEqual([]);
 			expect(result.totalReleases).toBe(0);
 		});
 	});
@@ -274,7 +276,9 @@ describe('Release Grouping Utilities', () => {
 
 		it('should sort package groups by date', () => {
 			const result = groupReleasesByPackage(mockReleases);
-			const sorted = sortPackageGroups(result.groups, 'date', 'desc');
+			const sortedAll = sortPackageGroups(result.groups, 'date', 'desc');
+			// Ignore the repository aggregate group when comparing package date ordering
+			const sorted = sortedAll.filter((g) => g.name !== 'repository');
 
 			// Should be sorted by date (descending)
 			expect(sorted[0].name).toBe('package-e'); // 2025-01-06

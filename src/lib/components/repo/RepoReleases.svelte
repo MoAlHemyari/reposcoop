@@ -41,7 +41,6 @@
 
 	// Filter options
 	let filterText = $state('');
-	let showUngrouped = $state(true);
 
 	// Fetch releases by pages with pagination
 	async function fetchPage(pageNumber: number): Promise<boolean> {
@@ -57,8 +56,8 @@
 			apiResponse = resp; // keep latest meta/rate info
 			// Append releases and regroup
 			releases = [...releases, ...resp.releases];
-			groupedReleases = groupReleasesByPackage(releases);
-			updateSortedGroups();
+				groupedReleases = groupReleasesByPackage(releases, repo);
+				updateSortedGroups();
 			return true;
 		} catch (err) {
 			const msg = err instanceof Error ? err.message : String(err);
@@ -326,17 +325,6 @@
 					</button>
 				</div>
 
-				<!-- Show Ungrouped Checkbox -->
-				<label class="flex items-center gap-2 w-full sm:w-auto" for="show-ungrouped">
-					<input
-						id="show-ungrouped"
-						type="checkbox"
-						bind:checked={showUngrouped}
-						class="rounded"
-						aria-label="Show ungrouped releases"
-					>
-					<span class="text-sm">Show ungrouped</span>
-				</label>
 			</div>
 		{/if}
 	</div>
@@ -442,9 +430,6 @@
 						<h2 class="text-lg font-semibold">Repository Summary</h2>
 						<p class="text-sm text-gray-600 dark:text-gray-300">
 							Found {groupedReleases.totalReleases} releases across {groupedReleases.groups.length} packages
-							{#if groupedReleases.ungrouped.length > 0}
-								and {groupedReleases.ungrouped.length} ungrouped releases
-							{/if}
 						</p>
 					</div>
 					{#if apiResponse?.meta?.rateLimit}
@@ -618,87 +603,6 @@
 					</div>
 				{/each}
 			</div>
-
-			<!-- Ungrouped Releases -->
-			{#if showUngrouped && groupedReleases.ungrouped.length > 0}
-				<div class="mt-6" in:fade|local={{ delay: 300, duration: 300 }}>
-					<h3 class="text-xl font-semibold mb-4">Ungrouped Releases</h3>
-					<div class="border rounded-lg overflow-hidden" in:fly|local={{ y: 20, duration: 300 }}>
-						{#each groupedReleases.ungrouped as release, j}
-							<div
-								class="p-4 border-b last:border-b-0 bg-white dark:bg-gray-800"
-								in:fly|local={{ y: 10, delay: j * 30, duration: 200, opacity: 0 }}
-							>
-								<div class="flex justify-between items-start">
-									<div>
-										<h4 class="font-medium">{release.name || release.tag_name}</h4>
-										<p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
-											Released on {new Date(release.published_at || release.created_at).toLocaleDateString()}
-										</p>
-									</div>
-									<a
-										href={release.html_url}
-										target="_blank"
-										rel="noopener noreferrer"
-										aria-label={`View ${release.name || release.tag_name} on GitHub (opens in new tab)`}
-									>
-										<Button variant="outline" size="sm">
-											View on GitHub
-											<span class="sr-only">Opens in new tab</span>
-										</Button>
-									</a>
-								</div>
-								{#if release.body}
-										<div class="mt-2 text-sm text-gray-600 dark:text-gray-300">
-											<!-- Toggle Button -->
-											<button
-												class="flex items-center gap-1 text-xs text-blue-600 dark:text-blue-400 mb-2 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-sm px-1"
-												onclick={() => (release.notesExpanded = !release.notesExpanded)}
-												aria-expanded={release.notesExpanded || false}
-												aria-controls={`ungrouped-notes-${release.id}`}
-											>
-												<svg
-													xmlns="http://www.w3.org/2000/svg"
-													class="h-3 w-3 transition-transform duration-200 {release.notesExpanded ? 'rotate-90' : ''}"
-													fill="none"
-													viewBox="0 0 24 24"
-													stroke="currentColor"
-												>
-													<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-												</svg>
-												{release.notesExpanded ? 'Collapse notes' : 'Expand notes'}
-											</button>
-
-											<!-- Collapsed Preview -->
-											{#if !release.notesExpanded}
-												<div class="max-h-24 overflow-hidden relative">
-													<Markdown content={release.body.substring(0, 150)} class="release-preview" />
-													<div class="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-white dark:from-gray-800 to-transparent"></div>
-												</div>
-											{:else}
-												<!-- Expanded Full Content -->
-												<div id={`ungrouped-notes-${release.id}`} transition:slide={{ duration: 200 }}>
-													<Markdown content={release.body} class="release-preview" />
-													<div class="text-xs text-blue-500 mt-2">
-														<a
-															href={release.html_url}
-															target="_blank"
-															rel="noopener noreferrer"
-															aria-label={`View full release on GitHub for ${release.name || release.tag_name} (opens in new tab)`}
-														>
-															View on GitHub
-															<span class="sr-only">Opens in new tab</span>
-														</a>
-													</div>
-												</div>
-											{/if}
-										</div>
-									{/if}
-								</div>
-							{/each}
-						</div>
-					</div>
-				{/if}
 			{/if}
 	</div>
 </div>
