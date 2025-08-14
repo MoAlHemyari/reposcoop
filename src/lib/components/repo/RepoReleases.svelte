@@ -11,6 +11,8 @@
 		type GroupedReleases,
 		type PackageGroup
 	} from '$lib/utils/release-grouping';
+	import GroupListItem from '$lib/components/repo/GroupListItem.svelte';
+	import GroupCardItem from '$lib/components/repo/GroupCardItem.svelte';
 
 	// Props
 	let { owner, repo } = $props<{ owner: string; repo: string }>();
@@ -41,6 +43,10 @@
 
 	// Filter options
 	let filterText = $state('');
+
+	// View options
+	let viewMode = $state<'list' | 'cards'>('list');
+    let ItemComponent = $derived(viewMode === 'cards' ? GroupCardItem : GroupListItem);
 
 	// Fetch releases by pages with pagination
 	async function fetchPage(pageNumber: number): Promise<boolean> {
@@ -218,9 +224,21 @@
 
 <div class="container mx-auto p-4">
 	<header class="mb-6">
-		<h1 class="text-3xl font-bold">
-			{owner}/{repo}
-		</h1>
+		<div class="flex items-center gap-2">
+			<h1 class="text-3xl font-bold">
+				{owner}/{repo}
+			</h1>
+			<a
+				class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
+				href={`https://github.com/${owner}/${repo}`}
+				target="_blank"
+				rel="noopener noreferrer"
+				aria-label="Open repository on GitHub (opens in new tab)"
+				title="Open on GitHub"
+			>
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-6 w-6" aria-hidden="true"><path fill="currentColor" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.51 2.87 8.33 6.84 9.68c.5.1.68-.22.68-.49c0-.24-.01-.87-.01-1.71c-2.78.62-3.37-1.2-3.37-1.2c-.45-1.18-1.11-1.49-1.11-1.49c-.91-.64.07-.63.07-.63c1 .07 1.52 1.05 1.52 1.05c.9 1.56 2.36 1.11 2.94.85c.09-.67.35-1.11.63-1.37c-2.22-.26-4.56-1.14-4.56-5.08c0-1.12.39-2.03 1.03-2.75c-.1-.26-.45-1.3.1-2.71c0 0 .84-.27 2.75 1.05c.8-.23 1.65-.35 2.5-.35s1.7.12 2.5.35c1.9-1.32 2.74-1.05 2.74-1.05c.55 1.41.2 2.45.1 2.71c.64.72 1.02 1.63 1.02 2.75c0 3.95-2.34 4.82-4.57 5.07c.36.32.68.95.68 1.92c0 1.39-.01 2.5-.01 2.84c0 .27.18.6.69.49C19.13 20.58 22 16.76 22 12.26C22 6.58 17.52 2 12 2"/></svg>
+			</a>
+		</div>
 		<p class="text-muted-foreground">Repository releases grouped by package</p>
 	</header>
 
@@ -322,6 +340,26 @@
 						}}
 					>
 						Date {sortBy === 'date' ? (sortOrder === 'asc' ? '↑' : '↓') : ''}
+					</button>
+				</div>
+
+				<!-- View Controls -->
+				<div class="flex border rounded-md overflow-hidden w-full sm:w-auto" role="group" aria-label="View options">
+					<button
+						class="flex-1 sm:flex-none px-3 py-2 text-sm {viewMode === 'list' ? 'bg-blue-100 dark:bg-blue-900' : 'bg-white dark:bg-gray-800'}"
+						onclick={() => (viewMode = 'list')}
+						aria-label="List view"
+						aria-pressed={viewMode === 'list'}
+					>
+						List
+					</button>
+					<button
+						class="flex-1 sm:flex-none px-3 py-2 text-sm border-l {viewMode === 'cards' ? 'bg-blue-100 dark:bg-blue-900' : 'bg-white dark:bg-gray-800'}"
+						onclick={() => (viewMode = 'cards')}
+						aria-label="Card view"
+						aria-pressed={viewMode === 'cards'}
+					>
+						Cards
 					</button>
 				</div>
 
@@ -441,166 +479,16 @@
 			</div>
 
 			<!-- Package Groups -->
-			<div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-				{#each sortedGroups as group, i}
-					<div
-						in:fly|local={{ y: 20, delay: 50 * i, duration: 300, opacity: 0 }}
-						class="border rounded-lg overflow-hidden bg-white dark:bg-gray-800 shadow-sm hover:shadow-md transition-all"
-					>
-						<!-- Package Header (always visible) -->
-						<div
-							class="p-4 bg-gray-50 dark:bg-gray-700 border-b cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
-							onclick={() => (group.isExpanded = !group.isExpanded)}
-							onkeydown={(e) => {
-								if (e.key === 'Enter' || e.key === ' ') {
-									e.preventDefault();
-									group.isExpanded = !group.isExpanded;
-								}
-							}}
-							tabindex="0"
-							role="button"
-							aria-expanded={group.isExpanded || false}
-							aria-controls={`releases-${group.name.replace(/[^a-zA-Z0-9]/g, '-')}`}
-							aria-label={`${group.name} package with ${group.releaseCount} releases. ${group.isExpanded ? 'Click to collapse' : 'Click to expand'}`}
-						>
-							<div class="flex justify-between items-center">
-								<h3 class="font-semibold truncate" title={group.name}>{group.name}</h3>
-								<div class="flex items-center gap-2">
-									<span class="text-sm bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-0.5 rounded-full">
-										{group.releaseCount}
-									</span>
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										class="h-4 w-4 transition-transform duration-200 {group.isExpanded ? 'rotate-180' : ''}"
-										fill="none"
-										viewBox="0 0 24 24"
-										stroke="currentColor"
-									>
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-									</svg>
-								</div>
-							</div>
-							<p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
-								Latest: {new Date(group.latestRelease.published_at || group.latestRelease.created_at).toLocaleDateString()}
-							</p>
-						</div>
-
-						<!-- Package Summary (visible when collapsed) -->
-						{#if !group.isExpanded}
-							<div class="p-4">
-								<p class="text-sm mb-2">Latest version: <span class="font-mono">{group.latestRelease.version || group.latestRelease.tag_name}</span></p>
-								<Button
-									variant="outline"
-									size="sm"
-									class="w-full"
-									onclick={(e) => {
-										e.stopPropagation();
-										group.isExpanded = true;
-									}}
-								>
-									View Releases
-								</Button>
-							</div>
-						{/if}
-
-						<!-- Releases List (visible when expanded) -->
-						{#if group.isExpanded}
-							<div
-								id={`releases-${group.name.replace(/[^a-zA-Z0-9]/g, '-')}`}
-								class="border-t divide-y divide-gray-100 dark:divide-gray-700 max-h-96 overflow-y-auto"
-								transition:slide={{ duration: 300 }}
-							>
-								{#each group.releases as release, j}
-									<div
-										class="p-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-										in:fly|local={{ y: 10, delay: j * 30, duration: 200, opacity: 0 }}
-									>
-										<div class="flex justify-between items-start">
-											<div class="flex-1 min-w-0">
-												<h4 class="font-medium text-sm truncate" title={release.name || release.tag_name}>
-													{release.version || release.tag_name}
-												</h4>
-												<p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
-													{new Date(release.published_at || release.created_at).toLocaleDateString()}
-												</p>
-											</div>
-											<a
-												href={release.html_url}
-												target="_blank"
-												rel="noopener noreferrer"
-												class="text-blue-600 dark:text-blue-400 hover:underline text-sm ml-2"
-												aria-label={`View ${release.version || release.tag_name} on GitHub (opens in new tab)`}
-											>
-												<span>GitHub</span>
-												<span class="sr-only">Opens in new tab</span>
-											</a>
-										</div>
-
-										<!-- Release Notes with Toggle -->
-										{#if release.body}
-											<div class="mt-2 text-sm text-gray-600 dark:text-gray-300">
-												<!-- Toggle Button -->
-												<button
-													class="flex items-center gap-1 text-xs text-blue-600 dark:text-blue-400 mb-2 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-sm px-1"
-													onclick={() => (release.notesExpanded = !release.notesExpanded)}
-													aria-expanded={release.notesExpanded || false}
-													aria-controls={`notes-${release.id}`}
-												>
-													<svg
-														xmlns="http://www.w3.org/2000/svg"
-														class="h-3 w-3 transition-transform duration-200 {release.notesExpanded ? 'rotate-90' : ''}"
-														fill="none"
-														viewBox="0 0 24 24"
-														stroke="currentColor"
-													>
-														<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-													</svg>
-													{release.notesExpanded ? 'Collapse notes' : 'Expand notes'}
-												</button>
-
-												<!-- Collapsed Preview -->
-												{#if !release.notesExpanded}
-													<div class="max-h-24 overflow-hidden relative">
-														<Markdown content={release.body.substring(0, 150)} class="release-preview" />
-														<div class="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-white dark:from-gray-800 to-transparent"></div>
-													</div>
-												{:else}
-													<!-- Expanded Full Content -->
-													<div id={`notes-${release.id}`} transition:slide={{ duration: 200 }}>
-														<Markdown content={release.body} class="release-preview" />
-														<div class="text-xs text-blue-500 mt-2">
-															<a
-																href={release.html_url}
-																target="_blank"
-																rel="noopener noreferrer"
-																aria-label={`View full release on GitHub for ${release.version || release.tag_name} (opens in new tab)`}
-															>
-																View on GitHub
-																<span class="sr-only">Opens in new tab</span>
-															</a>
-														</div>
-													</div>
-												{/if}
-										</div>
-									{/if}
- 							</div>
- 							{/each}
-
- 							<div class="p-3 bg-gray-50 dark:bg-gray-700 text-center">
-									<Button
-										variant="ghost"
-										size="sm"
-										onclick={(e) => {
-											e.stopPropagation();
-											group.isExpanded = false;
-										}}
-									>
-										Collapse
-									</Button>
-								</div>
-							</div>
-						{/if}
-					</div>
+			<div class={`grid ${viewMode === 'cards' ? 'md:grid-cols-2 lg:grid-cols-3 gap-4' : 'grid-cols-1 divide-y'}`}>
+				{#each sortedGroups as group, i (group.name)}
+                    <div in:fly|local={{ y: 20, delay: 50 * i, duration: 300 }}>
+                        <ItemComponent
+                            group={group}
+                            index={i}
+                            owner={owner}
+                            repo={repo}
+                        />
+                    </div>
 				{/each}
 			</div>
 			{/if}
