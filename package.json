@@ -16,7 +16,7 @@
 		"format": "biome format --write .",
 		"lint": "biome check .",
 		"lint:fix": "biome check --write .",
-		"test:unit": "vitest",
+		"test:unit": "vitest run --browser.headless",
 		"test": "bun run test:unit -- --run && bun run test:e2e",
 		"test:e2e": "playwright test"
 	},
