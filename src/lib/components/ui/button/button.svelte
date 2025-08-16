@@ -12,8 +12,10 @@
 	 * <Button variant="link">Link Button</Button>
 	 * ```
 	 */
-	import { cva, type VariantProps } from 'class-variance-authority';
+    import { cva, type VariantProps } from 'class-variance-authority';
 	import { cn } from '$lib/utils';
+	import type { HTMLButtonAttributes } from 'svelte/elements';
+    import type { Snippet } from "svelte";
 
 	/**
 	 * Defines the available button variants and sizes using class-variance-authority
@@ -58,9 +60,11 @@
 		children,
 		...props
 	} = $props<
-		VariantProps<typeof buttonVariants> & {
+		VariantProps<typeof buttonVariants> &
+		HTMLButtonAttributes & {
 			class?: string;
 			type?: 'button' | 'submit' | 'reset';
+			children?: Snippet;
 		}
 	>();
 
