@@ -13,7 +13,7 @@ describe('Button Component', () => {
 		}).not.toThrow();
 	});
 
-	it('should render with default variant and size', async () => {
+	it('should render with default styling', async () => {
 		render(Button, { children: textSnippet('Click me') });
 
 		const button = page.getByRole('button', { name: 'Click me' });
@@ -25,73 +25,13 @@ describe('Button Component', () => {
 			.toHaveAttribute('class', expect.stringContaining('h-10 px-4 py-2'));
 	});
 
-	it('should render with destructive variant', async () => {
-		render(Button, { variant: 'destructive', children: textSnippet('Delete') });
-
-		const button = page.getByRole('button', { name: 'Delete' });
-		await expect.element(button).toBeInTheDocument();
-		await expect
-			.element(button)
-			.toHaveAttribute('class', expect.stringContaining('bg-destructive'));
-	});
-
-	it('should render with outline variant', async () => {
+	it('should render with outline styling via variant', async () => {
 		render(Button, { variant: 'outline', children: textSnippet('Outline') });
 
 		const button = page.getByRole('button', { name: 'Outline' });
 		await expect
 			.element(button)
 			.toHaveAttribute('class', expect.stringContaining('border border-input'));
-	});
-
-	it('should render with secondary variant', async () => {
-		render(Button, { variant: 'secondary', children: textSnippet('Secondary') });
-
-		const button = page.getByRole('button', { name: 'Secondary' });
-		await expect.element(button).toHaveAttribute('class', expect.stringContaining('bg-secondary'));
-	});
-
-	it('should render with ghost variant', async () => {
-		render(Button, { variant: 'ghost', children: textSnippet('Ghost') });
-
-		const button = page.getByRole('button', { name: 'Ghost' });
-		await expect
-			.element(button)
-			.toHaveAttribute('class', expect.stringContaining('hover:bg-accent'));
-	});
-
-	it('should render with link variant', async () => {
-		render(Button, { variant: 'link', children: textSnippet('Link') });
-
-		const button = page.getByRole('button', { name: 'Link' });
-		await expect
-			.element(button)
-			.toHaveAttribute('class', expect.stringContaining('text-primary underline-offset-4'));
-	});
-
-	it('should render with small size', async () => {
-		render(Button, { size: 'sm', children: textSnippet('Small') });
-
-		const button = page.getByRole('button', { name: 'Small' });
-		await expect
-			.element(button)
-			.toHaveAttribute('class', expect.stringContaining('h-9 rounded-md px-3'));
-	});
-
-	it('should render with large size', async () => {
-		render(Button, { size: 'lg', children: textSnippet('Large') });
-
-		const button = page.getByRole('button', { name: 'Large' });
-		await expect
-			.element(button)
-			.toHaveAttribute('class', expect.stringContaining('h-11 rounded-md px-8'));
-	});
-
-	it('should render with icon size', async () => {
-		render(Button, { size: 'icon', children: textSnippet('Icon') });
-
-		const button = page.getByRole('button', { name: 'Icon' });
-		await expect.element(button).toHaveAttribute('class', expect.stringContaining('h-10 w-10'));
 	});
 
 	it('should apply additional class names', async () => {

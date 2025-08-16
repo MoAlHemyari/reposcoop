@@ -1,21 +1,17 @@
 <script lang="ts">
 	/**
-	 * Button component with various styles and sizes.
+	 * Button component with minimal styles.
 	 *
 	 * @component
 	 * @example
 	 * ```svelte
 	 * <Button>Default Button</Button>
-	 * <Button variant="destructive">Destructive Button</Button>
-	 * <Button variant="outline" size="sm">Small Outline Button</Button>
-	 * <Button variant="ghost" size="lg">Large Ghost Button</Button>
-	 * <Button variant="link">Link Button</Button>
+	 * <Button variant="outline">Outline Button</Button>
 	 * ```
 	 */
     import { cva, type VariantProps } from 'class-variance-authority';
 	import { cn } from '$lib/utils';
 	import type { HTMLButtonAttributes } from 'svelte/elements';
-    import type { Snippet } from "svelte";
 
 	/**
 	 * Defines the available button variants and sizes using class-variance-authority
@@ -26,17 +22,10 @@
 			variants: {
 				variant: {
 					default: 'bg-primary text-primary-foreground hover:bg-primary/90',
-					destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
-					outline: 'border border-input hover:bg-accent hover:text-accent-foreground',
-					secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
-					ghost: 'hover:bg-accent hover:text-accent-foreground',
-					link: 'text-primary underline-offset-4 hover:underline'
+					outline: 'border border-input hover:bg-accent hover:text-accent-foreground'
 				},
 				size: {
-					default: 'h-10 px-4 py-2',
-					sm: 'h-9 rounded-md px-3',
-					lg: 'h-11 rounded-md px-8',
-					icon: 'h-10 w-10'
+					default: 'h-10 px-4 py-2'
 				}
 			},
 			defaultVariants: {
@@ -49,8 +38,8 @@
 	/**
 	 * Component props
 	 * @property {string} [class] - Additional CSS classes to apply to the button
-	 * @property {string} [variant='default'] - Button style variant: 'default', 'destructive', 'outline', 'secondary', 'ghost', or 'link'
-	 * @property {string} [size='default'] - Button size: 'default', 'sm', 'lg', or 'icon'
+	 * @property {string} [variant='default'] - Button style variant: 'default' or 'outline'
+	 * @property {string} [size='default'] - Button size: 'default'
 	 * @property {string} [type='button'] - HTML button type: 'button', 'submit', or 'reset'
 	 */
 	let {
@@ -61,11 +50,7 @@
 		...props
 	} = $props<
 		VariantProps<typeof buttonVariants> &
-		HTMLButtonAttributes & {
-			class?: string;
-			type?: 'button' | 'submit' | 'reset';
-			children?: Snippet;
-		}
+		HTMLButtonAttributes
 	>();
 
 	let _class = $derived(cn(buttonVariants({ variant, size }), className));
