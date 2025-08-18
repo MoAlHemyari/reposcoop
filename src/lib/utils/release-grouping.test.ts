@@ -2,10 +2,10 @@ import { describe, expect, it } from 'vitest';
 import {
 	detectPackagePatterns,
 	extractPackageInfo,
-	type GitHubRelease,
 	groupReleasesByPackage,
 	sortPackageGroups
 } from './release-grouping';
+import type { GitHubRelease } from '$lib/services/github-api';
 
 // Mock GitHub releases for testing
 const mockReleases: GitHubRelease[] = [

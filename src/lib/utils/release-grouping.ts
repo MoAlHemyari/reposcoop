@@ -4,8 +4,9 @@
  * This module provides functions for grouping GitHub releases by package name.
  */
 
-import type { GitHubRelease } from '$lib/services/github-api';
+// import type { GitHubRelease } from '$lib/services/github-api';
 import type { Release } from '$lib/services/repo-api';
+// export type { GitHubRelease } from '$lib/services/github-api';
 
 /**
  * Interface for a grouped release

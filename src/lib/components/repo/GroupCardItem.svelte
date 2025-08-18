@@ -80,7 +80,7 @@
 	<!-- Expanded Releases -->
 	{#if group.isExpanded}
 		<div id={`releases-${group.name.replace(/[^a-zA-Z0-9]/g, '-')}`}>
-			<GroupReleasesList releases={group.releases} {maxHeight} on:collapse={() => (group.isExpanded = false)} />
+			<GroupReleasesList releases={group.releases} {maxHeight} onCollapse={() => (group.isExpanded = false)} />
 		</div>
 	{/if}
 </div>

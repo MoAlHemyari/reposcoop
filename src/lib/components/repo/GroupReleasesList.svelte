@@ -6,12 +6,12 @@
 		releases,
 		maxHeight = '24rem',
 		showCollapseButton = true,
-		'on:collapse': oncollapse
+		onCollapse
 	} = $props<{
 		releases: Release[];
 		maxHeight?: string | number;
 		showCollapseButton?: boolean;
-		'on:collapse'?: () => void;
+		onCollapse: () => void;
 	}>();
 </script>
 
@@ -97,7 +97,7 @@
 
 	{#if showCollapseButton}
 		<div class="bg-gray-50 p-3 text-center dark:bg-gray-700">
-			<button class="text-sm text-blue-600 hover:underline dark:text-blue-400" onclick={() => oncollapse?.()}>
+			<button class="text-sm text-blue-600 hover:underline dark:text-blue-400" onclick={() => onCollapse()}>
 				Collapse
 			</button>
 		</div>

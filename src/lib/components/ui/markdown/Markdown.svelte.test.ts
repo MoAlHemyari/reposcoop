@@ -33,9 +33,8 @@ describe('Markdown Component', () => {
       `
 		});
 
-		const listItems = page.getByRole('listitem');
-		await expect.element(listItems).toBeInTheDocument();
-		expect(await listItems.count()).toBe(3);
+		const listItems = document.querySelectorAll('li');
+		expect(listItems.length).toBe(3);
 	});
 
 	it('should render code blocks correctly', async () => {
@@ -43,8 +42,8 @@ describe('Markdown Component', () => {
 			content: '```\nconst test = "code block";\n```'
 		});
 
-		const codeBlock = page.locator('pre code');
-		await expect.element(codeBlock).toBeInTheDocument();
+		const codeBlock = document.querySelector('pre code');
+		expect(codeBlock).toBeTruthy();
 	});
 
 	it('should render links correctly', async () => {
@@ -63,8 +62,8 @@ describe('Markdown Component', () => {
 			class: 'custom-class'
 		});
 
-		const container = page.locator('.markdown-content.custom-class');
-		await expect.element(container).toBeInTheDocument();
+		const container = document.querySelector('.markdown-content.custom-class');
+		expect(container).toBeTruthy();
 	});
 
 	it('should sanitize HTML to prevent XSS', async () => {
@@ -72,7 +71,9 @@ describe('Markdown Component', () => {
 			content: '<script>alert("XSS")</script>'
 		});
 
-		const script = page.locator('script');
-		await expect.element(script).not.toBeInTheDocument();
+		const container = document.querySelector('.markdown-content');
+		expect(container).toBeTruthy();
+		const script = container!.querySelector('script');
+		expect(script).toBeNull();
 	});
 });

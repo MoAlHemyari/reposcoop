@@ -74,7 +74,7 @@
 
 	{#if group.isExpanded}
 		<div id={`releases-${group.name.replace(/[^a-zA-Z0-9]/g, '-')}`} class="bg-gray-50/70 dark:bg-gray-800/60">
-			<GroupReleasesList releases={group.releases} {maxHeight} on:collapse={() => (group.isExpanded = false)} />
+			<GroupReleasesList releases={group.releases} {maxHeight} onCollapse={() => (group.isExpanded = false)} />
 		</div>
 	{/if}
 </div>

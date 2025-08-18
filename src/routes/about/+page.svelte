@@ -9,7 +9,7 @@
 	</header>
 
 	<div class="mb-4">
-		<Button variant="outline" onclick="history.back()">Back</Button>
+		<Button variant="outline" onclick={() => history.back()}>Back</Button>
 	</div>
 
 	<div class="prose max-w-none">
