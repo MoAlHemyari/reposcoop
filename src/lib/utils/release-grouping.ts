@@ -148,7 +148,11 @@ export function detectPackagePatterns(releases: Release[]): string[] {
 			patterns.add(tagInfo.packageName);
 		}
 
-		if (nameInfo?.packageName && nameInfo.packageName !== 'default' && nameInfo.packageName.toLowerCase() !== 'version') {
+		if (
+			nameInfo?.packageName &&
+			nameInfo.packageName !== 'default' &&
+			nameInfo.packageName.toLowerCase() !== 'version'
+		) {
 			patterns.add(nameInfo.packageName);
 		}
 	}
@@ -175,7 +179,12 @@ export function groupReleasesByPackage(releases: Release[], repoName?: string): 
 			packageInfo = extractPackageInfo(release.name);
 		} else if (packageInfo.packageName === 'default') {
 			const nameInfo = extractPackageInfo(release.name);
-			if (nameInfo && nameInfo.packageName && nameInfo.packageName !== 'default' && nameInfo.packageName.toLowerCase() !== 'version') {
+			if (
+				nameInfo &&
+				nameInfo.packageName &&
+				nameInfo.packageName !== 'default' &&
+				nameInfo.packageName.toLowerCase() !== 'version'
+			) {
 				packageInfo = nameInfo;
 			}
 		}
@@ -203,7 +212,9 @@ export function groupReleasesByPackage(releases: Release[], repoName?: string): 
 	// Determine repo group name
 	const repoGroupName = repoName && repoName.trim().length > 0 ? repoName : 'repository';
 	// Consider patterns meaningful if there is at least one non-default release
-	const nonDefaultCount = groupedReleases.filter((r) => r.packageName && r.packageName !== 'default' && r.packageName.toLowerCase() !== 'version').length;
+	const nonDefaultCount = groupedReleases.filter(
+		(r) => r.packageName && r.packageName !== 'default' && r.packageName.toLowerCase() !== 'version'
+	).length;
 	const hasPatterns = nonDefaultCount >= 1;
 
 	// Group by computed group key

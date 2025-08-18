@@ -196,7 +196,7 @@ describe('GitHub API Service', () => {
 			});
 		});
 
- 	it.skip('should use example data in development mode for supported repositories', async () => {
+		it.skip('should use example data in development mode for supported repositories', async () => {
 			// This test is skipped due to environment-specific behavior.
 			// Keeping a minimal assertion to satisfy the test runner.
 			expect(true).toBe(true);
@@ -214,9 +214,7 @@ describe('GitHub API Service', () => {
 			});
 
 			// Expect the function to throw an error
-			await expect(fetchAllReleases('test', 'repo')).rejects.toThrow(
-				'Repository test/repo not found'
-			);
+			await expect(fetchAllReleases('test', 'repo')).rejects.toThrow('Repository test/repo not found');
 		});
 
 		it('should handle rate limit errors correctly', async () => {
@@ -240,9 +238,7 @@ describe('GitHub API Service', () => {
 			});
 
 			// Expect the function to throw an error with rate limit information
-			await expect(fetchAllReleases('test', 'repo')).rejects.toThrow(
-				'GitHub API rate limit exceeded'
-			);
+			await expect(fetchAllReleases('test', 'repo')).rejects.toThrow('GitHub API rate limit exceeded');
 		});
 	});
 

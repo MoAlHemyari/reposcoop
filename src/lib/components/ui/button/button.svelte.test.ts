@@ -2,14 +2,14 @@ import { page } from '@vitest/browser/context';
 import { describe, expect, it, vi } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import { Button } from './index';
-import type { Snippet } from "svelte";
+import type { Snippet } from 'svelte';
 
 const textSnippet = (s: string) => (() => s) as unknown as Snippet;
 
 describe('Button Component', () => {
 	it('should render without errors', () => {
 		expect(() => {
-			render(Button, { children: textSnippet('Click me')});
+			render(Button, { children: textSnippet('Click me') });
 		}).not.toThrow();
 	});
 
@@ -20,18 +20,14 @@ describe('Button Component', () => {
 		await expect.element(button).toBeInTheDocument();
 
 		await expect.element(button).toHaveAttribute('class', expect.stringContaining('bg-primary'));
-		await expect
-			.element(button)
-			.toHaveAttribute('class', expect.stringContaining('h-10 px-4 py-2'));
+		await expect.element(button).toHaveAttribute('class', expect.stringContaining('h-10 px-4 py-2'));
 	});
 
 	it('should render with outline styling via variant', async () => {
 		render(Button, { variant: 'outline', children: textSnippet('Outline') });
 
 		const button = page.getByRole('button', { name: 'Outline' });
-		await expect
-			.element(button)
-			.toHaveAttribute('class', expect.stringContaining('border border-input'));
+		await expect.element(button).toHaveAttribute('class', expect.stringContaining('border border-input'));
 	});
 
 	it('should apply additional class names', async () => {

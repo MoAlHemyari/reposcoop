@@ -25,8 +25,7 @@ export function parseGitHubUrl(url: string): { owner: string; repo: string } | n
 	if (!url) return null;
 
 	// Match GitHub repository URLs in various formats
-	const githubRegex =
-		/^(?:https?:\/\/)?(?:www\.)?github\.com\/([^/\s]+)\/([^/\s#?]+)(?:[/]?|#.*|$|\?.*)/i;
+	const githubRegex = /^(?:https?:\/\/)?(?:www\.)?github\.com\/([^/\s]+)\/([^/\s#?]+)(?:[/]?|#.*|$|\?.*)/i;
 	const match = url.match(githubRegex);
 
 	if (match) {

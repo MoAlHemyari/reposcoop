@@ -101,7 +101,7 @@ describe('Home Page', () => {
 	it('should handle example repository clicks', async () => {
 		render(Page);
 
-	  const exampleRepo = page.getByText('clerk/javascript');
+		const exampleRepo = page.getByText('clerk/javascript');
 		await exampleRepo.click();
 
 		// Wait for the timeout in the component

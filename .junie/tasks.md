@@ -5,6 +5,7 @@ This document contains a detailed checklist of actionable tasks for implementing
 ## Phase 1: Core Functionality
 
 ### Setup and Configuration
+
 1. [x] Initialize SvelteKit project with TypeScript support
 2. [x] Install and configure TailwindCSS with required plugins (@tailwindcss/forms, @tailwindcss/typography)
 3. [x] Set up shadcn-svelte for UI components
@@ -15,6 +16,7 @@ This document contains a detailed checklist of actionable tasks for implementing
 8. [x] Create initial project documentation
 
 ### Repository Input
+
 9. [x] Design and implement home page layout
 10. [x] Create repository URL input component with validation
 11. [x] Implement URL parsing to extract owner and repository name
@@ -25,6 +27,7 @@ This document contains a detailed checklist of actionable tasks for implementing
 16. [x] Add unit tests for URL parsing and validation
 
 ### GitHub API Integration
+
 17. [x] Create GitHub API service module
 18. [x] Implement fetch function for repository releases
 19. [x] Add pagination support for repositories with many releases
@@ -36,6 +39,7 @@ This document contains a detailed checklist of actionable tasks for implementing
 25. [x] Write unit tests for API integration
 
 ### Release Grouping Logic
+
 26. [x] Develop algorithm to detect package names from release titles
 27. [x] Implement function to group releases by package name
 28. [x] Create sorting mechanism for packages (alphabetical)
@@ -45,6 +49,7 @@ This document contains a detailed checklist of actionable tasks for implementing
 32. [x] Add unit tests for grouping and sorting algorithms
 
 ### Basic UI Implementation
+
 33. [x] Create main layout component with responsive design
 34. [x] Implement collapsible package group component
 35. [x] Design and implement release item display
@@ -58,6 +63,7 @@ This document contains a detailed checklist of actionable tasks for implementing
 ## Phase 2: Enhanced User Experience
 
 ### Advanced UI Features
+
 42. [x] Implement collapsible release notes with toggle
 43. [ ] Add syntax highlighting for code blocks in release notes
 44. [ ] Create filtering system for packages
@@ -69,6 +75,7 @@ This document contains a detailed checklist of actionable tasks for implementing
 50. [ ] Implement keyboard shortcuts for navigation
 
 ### Performance Optimizations
+
 51. [ ] Optimize rendering for repositories with many releases
 52. [ ] Implement virtualized lists for long release lists
 53. [ ] Add lazy loading for release content and images
@@ -79,6 +86,7 @@ This document contains a detailed checklist of actionable tasks for implementing
 58. [ ] Implement performance monitoring and metrics
 
 ### User Preferences
+
 59. [ ] Create dark/light mode toggle with system preference detection
 60. [ ] Implement local storage for user preferences
 61. [ ] Add customization options for display density
@@ -89,6 +97,7 @@ This document contains a detailed checklist of actionable tasks for implementing
 66. [ ] Implement user-defined package grouping rules
 
 ### Sharing and Integration
+
 67. [ ] Add URL parameter support for sharing specific views
 68. [ ] Implement copy-to-clipboard for release links
 69. [ ] Create shareable links for specific packages or releases

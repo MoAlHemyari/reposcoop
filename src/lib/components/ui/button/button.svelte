@@ -9,7 +9,7 @@
 	 * <Button variant="outline">Outline Button</Button>
 	 * ```
 	 */
-    import { cva, type VariantProps } from 'class-variance-authority';
+	import { cva, type VariantProps } from 'class-variance-authority';
 	import { cn } from '$lib/utils';
 	import type { HTMLButtonAttributes } from 'svelte/elements';
 
@@ -48,10 +48,7 @@
 		size,
 		children,
 		...props
-	} = $props<
-		VariantProps<typeof buttonVariants> &
-		HTMLButtonAttributes
-	>();
+	} = $props<VariantProps<typeof buttonVariants> & HTMLButtonAttributes>();
 
 	let _class = $derived(cn(buttonVariants({ variant, size }), className));
 </script>

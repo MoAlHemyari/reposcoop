@@ -1,5 +1,6 @@
 # RepoScoop 📦🔍
-*Skim GitHub release notes in a single glance.*
+
+_Skim GitHub release notes in a single glance._
 
 RepoScoop solves the pain of navigating releases in large repositories—especially monorepos. Paste any GitHub repo URL and get an instant, collapsible view of each package’s versions alongside their release notes, grouped by package name for quick scanning.
 
@@ -17,6 +18,7 @@ RepoScoop solves the pain of navigating releases in large repositories—especia
 [Live Demo](https://reposcoop.pages.dev) (Coming soon)
 
 Try it with these example repositories:
+
 - [clerk/javascript](https://github.com/clerk/javascript) - Authentication library with multiple packages
 - [vercel/next.js](https://github.com/vercel/next.js) - React framework with many releases
 - [sveltejs/kit](https://github.com/sveltejs/kit) - Svelte application framework
@@ -31,12 +33,14 @@ Try it with these example repositories:
 ### Installation
 
 1. Clone the repository
+
    ```bash
    git clone https://github.com/your-username/reposcoop.git
    cd reposcoop
    ```
 
 2. Install dependencies
+
    ```bash
    bun install
    # or

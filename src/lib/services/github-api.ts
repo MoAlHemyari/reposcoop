@@ -59,12 +59,7 @@ export class GitHubApiProvider implements RepoApiProvider {
 	 * @returns Promise with releases and metadata
 	 * @throws Error if the API request fails
 	 */
-	private async fetchReleasesPage(
-		owner: string,
-		repo: string,
-		page = 1,
-		perPage = 100
-	): Promise<ApiResponse> {
+	private async fetchReleasesPage(owner: string, repo: string, page = 1, perPage = 100): Promise<ApiResponse> {
 		const url = `https://api.github.com/repos/${owner}/${repo}/releases?page=${page}&per_page=${perPage}`;
 
 		try {
@@ -77,12 +72,8 @@ export class GitHubApiProvider implements RepoApiProvider {
 
 			if (!response.ok) {
 				if (response.status === 403 && response.headers.get('x-ratelimit-remaining') === '0') {
-					const resetTime = new Date(
-						parseInt(response.headers.get('x-ratelimit-reset') || '0', 10) * 1000
-					);
-					throw new Error(
-						`GitHub API rate limit exceeded. Resets at ${resetTime.toLocaleTimeString()}`
-					);
+					const resetTime = new Date(parseInt(response.headers.get('x-ratelimit-reset') || '0', 10) * 1000);
+					throw new Error(`GitHub API rate limit exceeded. Resets at ${resetTime.toLocaleTimeString()}`);
 				}
 
 				if (response.status === 404) {
@@ -297,8 +288,7 @@ export const githubApi = new GitHubApiProvider();
 
 // Export the methods directly for backward compatibility
 // Use a safer approach to ensure githubApi is defined before destructuring
-export const fetchAllReleases = (owner: string, repo: string) =>
-	githubApi.fetchAllReleases(owner, repo);
+export const fetchAllReleases = (owner: string, repo: string) => githubApi.fetchAllReleases(owner, repo);
 export const fetchReleasesByPage = (owner: string, repo: string, page = 1, perPage = 100) =>
 	githubApi.fetchReleasesByPage(owner, repo, page, perPage);
 export const retryWithBackoff = <T>(fn: () => Promise<T>, retries = 3, delay = 1000) =>

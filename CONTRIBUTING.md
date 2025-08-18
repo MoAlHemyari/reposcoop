@@ -100,6 +100,7 @@ We follow the [Conventional Commits](https://www.conventionalcommits.org/) speci
 ```
 
 Types include:
+
 - `feat`: A new feature
 - `fix`: A bug fix
 - `docs`: Documentation changes
@@ -110,6 +111,7 @@ Types include:
 - `chore`: Changes to the build process or auxiliary tools
 
 Examples:
+
 - `feat: add recently viewed repositories feature`
 - `fix: correct repository URL validation`
 - `docs: update README with new examples`
