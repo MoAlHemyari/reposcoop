@@ -210,6 +210,7 @@ describe('Release Grouping Utilities', () => {
 
 	describe('groupReleasesByPackage', () => {
 		it('should group releases by package name and put default ones under repo group', () => {
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			const result = groupReleasesByPackage(mockReleases as any, 'repo');
 
 			// Should have 6 groups: 5 package groups + 1 repo group holding the default/version release
@@ -233,6 +234,7 @@ describe('Release Grouping Utilities', () => {
 		});
 
 		it('should sort releases within groups by date (newest first)', () => {
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			const result = groupReleasesByPackage(mockReleases as any, 'repo');
 
 			// Get package-a group which has multiple releases

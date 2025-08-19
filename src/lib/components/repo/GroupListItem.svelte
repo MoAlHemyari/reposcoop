@@ -4,16 +4,10 @@
 
 	let {
 		group,
-		owner,
-		repo,
-		index = 0,
 		maxHeight = '24rem',
 		'on:toggle': ontoggle
 	} = $props<{
 		group: PackageGroup;
-		owner: string;
-		repo: string;
-		index?: number;
 		maxHeight?: string | number;
 		'on:toggle'?: (detail: { expanded: boolean }) => void;
 	}>();
@@ -25,7 +19,7 @@
 	}
 </script>
 
-<li class="border-b first:border-t dark:border-gray-700 list-none">
+<li class="list-none border-b first:border-t dark:border-gray-700">
 	<!-- Collapsed Row / Summary -->
 	<div
 		class="flex cursor-pointer items-center gap-3 px-2 py-3 hover:bg-gray-50 sm:px-3 dark:hover:bg-gray-800/70"

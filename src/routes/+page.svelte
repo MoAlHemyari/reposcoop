@@ -171,7 +171,7 @@
 						<div
 							class="overflow-hidden rounded-lg border border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-800"
 						>
-							{#each recentRepos as repo}
+							{#each recentRepos as repo (repo.fullName)}
 								<button
 									onclick={() => viewRecentRepo(repo)}
 									class="flex w-full items-center justify-between border-b border-gray-200 p-3 text-left transition-colors last:border-b-0 hover:bg-gray-100 dark:border-gray-700 dark:hover:bg-gray-700"
@@ -200,7 +200,7 @@
 				<div class="mx-auto mb-12 max-w-2xl">
 					<h3 class="mb-3 text-xl font-semibold">Or try one of these examples:</h3>
 					<div class="grid grid-cols-1 gap-4 md:grid-cols-3">
-						{#each exampleRepos as repo}
+						{#each exampleRepos as repo (repo.name)}
 							<button
 								onclick={(e) => tryExampleRepo(e, repo.name)}
 								class="rounded-md border p-4 text-left transition-colors hover:bg-gray-50 dark:hover:bg-gray-700"

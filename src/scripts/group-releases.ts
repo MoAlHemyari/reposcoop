@@ -19,6 +19,7 @@ function deriveDefaultOutputPath(inputPath: string): string {
 	return inputPath + '.output.json';
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function toRelease(obj: any, idx: number): Release {
 	// Map a minimal object to the Release interface with safe defaults
 	const created = obj?.created_at ?? obj?.published_at ?? new Date(0).toISOString();

@@ -4,12 +4,13 @@ import { resolve } from 'path';
 import { groupReleasesByPackage } from './release-grouping';
 import type { Release } from '$lib/services/repo-api';
 
-function loadJson<T = any>(p: string): T {
+function loadJson<T = unknown>(p: string): T {
 	const full = resolve(process.cwd(), p);
 	const raw = readFileSync(full, 'utf-8');
 	return JSON.parse(raw) as T;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function normalizeInputToRelease(arr: any[]): Release[] {
 	return arr.map((r, i) => ({
 		id: r.id ?? i,
@@ -28,7 +29,7 @@ function normalizeInputToRelease(arr: any[]): Release[] {
 
 describe('Release grouping examples', () => {
 	it('groups React releases into repo group and eslint-plugin-react-hooks group matching expected ordering', () => {
-		const input = loadJson<any[]>('src/test/examples/facebook.react.input.json');
+		const input = loadJson<unknown[]>('src/test/examples/facebook.react.input.json');
 		const expected = loadJson<{ groups: { name: string; releases: { tag_name: string }[] }[] }>(
 			'src/test/examples/facebook.react.output.json'
 		);

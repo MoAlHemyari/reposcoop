@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui/button';
-	import { Markdown } from '$lib/components/ui/markdown';
 	import { onMount } from 'svelte';
-	import { slide, fade, fly } from 'svelte/transition';
+	import { fade, fly } from 'svelte/transition';
 	import { fetchReleasesByPage, retryWithBackoff } from '$lib/services/github-api';
 	import type { Release, ApiResponse } from '$lib/services/repo-api';
 	import {
@@ -25,7 +24,6 @@
 	let apiResponse = $state<ApiResponse | null>(null);
 	let groupedReleases = $state<GroupedReleases | null>(null);
 	let retryCount = $state(0);
-	let dataLoaded = $state(false); // Flag to track when data is loaded for animations
 	const maxRetries = 3;
 
 	// Pagination state
@@ -89,7 +87,6 @@
 		error = null;
 		rateLimitMessage = null;
 		rateLimitHitOnFirst = false;
-		dataLoaded = false;
 		releases = [];
 		groupedReleases = null;
 		currentPage = 0;
@@ -107,9 +104,6 @@
 			}
 		}
 		// Finish loading state but keep any partial data visible
-		setTimeout(() => {
-			dataLoaded = true;
-		}, 100);
 		loading = false;
 	}
 
@@ -117,14 +111,12 @@
 		if (loadingMore) return;
 		loadingMore = true;
 		rateLimitMessage = null; // will be set again if it happens
-		let loaded = 0;
 		for (let i = 0; i < pagesPerClick; i++) {
 			if (lastPage && currentPage >= lastPage) break;
 			const next = currentPage + 1;
 			const ok = await fetchPage(next);
 			if (!ok) break;
 			currentPage = next;
-			loaded++;
 		}
 		loadingMore = false;
 	}
@@ -222,13 +214,7 @@
 								}
 							}}
 						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								class="h-4 w-4"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke="currentColor"
-							>
+							<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" stroke="currentColor">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
 							</svg>
 						</button>
@@ -352,12 +338,7 @@
 			<div class="rounded-lg border bg-gray-50 p-6 shadow-sm dark:bg-gray-800">
 				<div class="flex flex-col items-center justify-center py-8">
 					<div class="relative mb-6">
-						<svg
-							class="h-12 w-12 animate-spin text-blue-500"
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-						>
+						<svg class="h-12 w-12 animate-spin text-blue-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 							<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
 							<path
 								class="opacity-75"
@@ -382,13 +363,7 @@
 			<div class="rounded-lg border border-red-200 bg-red-50 p-6 shadow-sm dark:border-red-800 dark:bg-red-900/20">
 				<div class="flex flex-col items-center gap-6 py-6 md:flex-row md:items-start">
 					<div class="flex-shrink-0 text-red-500">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							class="h-16 w-16"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-						>
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" viewBox="0 0 24 24" stroke="currentColor">
 							<path
 								stroke-linecap="round"
 								stroke-linejoin="round"
@@ -412,13 +387,7 @@
 			<div class="rounded-lg border bg-gray-50 p-6 shadow-sm dark:bg-gray-800">
 				<div class="flex flex-col items-center gap-6 py-6 md:flex-row md:items-start">
 					<div class="flex-shrink-0 text-gray-400">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							class="h-16 w-16"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-						>
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" viewBox="0 0 24 24" stroke="currentColor">
 							<path
 								stroke-linecap="round"
 								stroke-linejoin="round"
@@ -483,7 +452,7 @@
 			<div class={`grid ${viewMode === 'cards' ? 'gap-4 md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1 divide-y'}`}>
 				{#each sortedGroups as group, i (group.name)}
 					<div in:fly|local={{ y: 20, delay: 50 * i, duration: 300 }}>
-						<ItemComponent {group} index={i} {owner} {repo} />
+						<ItemComponent {group} />
 					</div>
 				{/each}
 			</div>

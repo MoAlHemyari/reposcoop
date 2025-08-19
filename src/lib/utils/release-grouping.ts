@@ -165,12 +165,10 @@ export function detectPackagePatterns(releases: Release[]): string[] {
  * Groups releases by package name
  *
  * @param releases - Array of repository releases
+ * @param repoName
  * @returns Grouped releases object
  */
 export function groupReleasesByPackage(releases: Release[], repoName?: string): GroupedReleases {
-	// Detect package patterns in the repository
-	const packagePatterns = detectPackagePatterns(releases);
-
 	// Process each release
 	const groupedReleases: GroupedRelease[] = releases.map((release) => {
 		// Try to extract package info from tag name first; fall back to release name only if tag is unusable

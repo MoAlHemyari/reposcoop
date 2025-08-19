@@ -81,7 +81,7 @@ const mockHeaders = {
 const mockFetch = vi.fn();
 
 // Setup global fetch mock
-vi.stubGlobal('fetch', mockFetch as any);
+vi.stubGlobal('fetch', mockFetch as unknown as typeof fetch);
 
 describe('GitHub API Service', () => {
 	beforeEach(() => {
@@ -252,9 +252,9 @@ describe('GitHub API Service', () => {
 			mockFn.mockResolvedValueOnce('Success');
 
 			// Mock setTimeout to avoid waiting in tests
-			vi.spyOn(globalThis, 'setTimeout').mockImplementation((callback: any) => {
+			vi.spyOn(globalThis, 'setTimeout').mockImplementation((callback: () => void) => {
 				callback();
-				return 0 as any;
+				return 0 as unknown as NodeJS.Timeout;
 			});
 
 			const result = await retryWithBackoff(mockFn, 3, 10);
@@ -273,9 +273,9 @@ describe('GitHub API Service', () => {
 			mockFn.mockRejectedValue(new Error('Always fails'));
 
 			// Mock setTimeout to avoid waiting in tests
-			vi.spyOn(globalThis, 'setTimeout').mockImplementation((callback: any) => {
+			vi.spyOn(globalThis, 'setTimeout').mockImplementation((callback: () => void) => {
 				callback();
-				return 0 as any;
+				return 0 as unknown as NodeJS.Timeout;
 			});
 
 			// Expect the function to throw after max retries

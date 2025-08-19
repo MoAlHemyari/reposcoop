@@ -13,7 +13,7 @@
 		"format": "prettier --write .",
 		"lint": "prettier --check . && eslint .",
 		"lint:fix": "prettier --write . && eslint --fix .",
-		"test:unit": "vitest run --browser.headless",
+		"test:unit": "vitest run",
 		"test": "bun run test:unit && bun run test:e2e",
 		"test:e2e": "playwright test"
 	},

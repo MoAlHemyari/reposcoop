@@ -10,7 +10,7 @@ import type { ApiResponse, ApiResponseMeta, Release, RepoApiProvider } from './r
 /**
  * GitHub-specific implementation of the Release interface
  */
-export interface GitHubRelease extends Release {}
+export type GitHubRelease = Release;
 
 /**
  * GitHub API Provider implementation

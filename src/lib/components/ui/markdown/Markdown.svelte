@@ -8,7 +8,6 @@
 	 * <Markdown content="# Hello World" />
 	 * ```
 	 */
-	import { onMount } from 'svelte';
 	import { marked } from 'marked';
 	import DOMPurify from 'dompurify';
 
@@ -39,6 +38,7 @@
 </script>
 
 <div class="markdown-content {className}">
+	<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 	{@html html}
 </div>
 

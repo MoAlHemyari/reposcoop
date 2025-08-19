@@ -20,8 +20,8 @@
 	style={`max-height: ${typeof maxHeight === 'number' ? `${maxHeight}px` : maxHeight}`}
 	reversed
 >
-	{#each releases as release, j}
-		<li class="p-4 transition-colors hover:bg-gray-50 dark:hover:bg-gray-700 list-none">
+	{#each releases as release (release.id)}
+		<li class="list-none p-4 transition-colors hover:bg-gray-50 dark:hover:bg-gray-700">
 			<div class="flex items-start justify-between">
 				<div class="min-w-0 flex-1">
 					<h4 class="truncate text-sm font-medium" title={release.name || release.tag_name}>
@@ -59,7 +59,6 @@
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							class="h-3 w-3 transition-transform duration-200 {release.notesExpanded ? 'rotate-90' : ''}"
-							fill="none"
 							viewBox="0 0 24 24"
 							stroke="currentColor"
 						>
@@ -97,7 +96,7 @@
 	{/each}
 
 	{#if showCollapseButton}
-		<li class="bg-gray-50 p-3 text-center dark:bg-gray-700 list-none">
+		<li class="list-none bg-gray-50 p-3 text-center dark:bg-gray-700">
 			<button class="text-sm text-blue-600 hover:underline dark:text-blue-400" onclick={() => onCollapse()}>
 				Collapse
 			</button>

@@ -4,12 +4,10 @@
 
 	let {
 		group,
-		index = 0,
 		maxHeight = '24rem',
 		'on:toggle': ontoggle
 	} = $props<{
 		group: PackageGroup;
-		index?: number;
 		maxHeight?: string | number;
 		'on:toggle'?: (detail: { expanded: boolean }) => void;
 	}>();
@@ -21,7 +19,9 @@
 	}
 </script>
 
-<li class="overflow-hidden rounded-lg border bg-white shadow-sm transition-all hover:shadow-md dark:bg-gray-800 list-none">
+<li
+	class="list-none overflow-hidden rounded-lg border bg-white shadow-sm transition-all hover:shadow-md dark:bg-gray-800"
+>
 	<!-- Header -->
 	<div
 		class="cursor-pointer border-b bg-gray-50 p-4 transition-colors hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600"
