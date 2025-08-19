@@ -21,7 +21,7 @@
 	}
 </script>
 
-<div class="overflow-hidden rounded-lg border bg-white shadow-sm transition-all hover:shadow-md dark:bg-gray-800">
+<li class="overflow-hidden rounded-lg border bg-white shadow-sm transition-all hover:shadow-md dark:bg-gray-800 list-none">
 	<!-- Header -->
 	<div
 		class="cursor-pointer border-b bg-gray-50 p-4 transition-colors hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600"
@@ -82,4 +82,4 @@
 			<GroupReleasesList releases={group.releases} {maxHeight} onCollapse={() => (group.isExpanded = false)} />
 		</div>
 	{/if}
-</div>
+</li>

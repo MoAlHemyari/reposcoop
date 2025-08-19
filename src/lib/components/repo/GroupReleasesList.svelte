@@ -15,12 +15,13 @@
 	}>();
 </script>
 
-<div
+<ol
 	class="divide-y divide-gray-100 overflow-y-auto border-t dark:divide-gray-700"
 	style={`max-height: ${typeof maxHeight === 'number' ? `${maxHeight}px` : maxHeight}`}
+	reversed
 >
 	{#each releases as release, j}
-		<div class="p-4 transition-colors hover:bg-gray-50 dark:hover:bg-gray-700">
+		<li class="p-4 transition-colors hover:bg-gray-50 dark:hover:bg-gray-700 list-none">
 			<div class="flex items-start justify-between">
 				<div class="min-w-0 flex-1">
 					<h4 class="truncate text-sm font-medium" title={release.name || release.tag_name}>
@@ -92,17 +93,17 @@
 					{/if}
 				</div>
 			{/if}
-		</div>
+		</li>
 	{/each}
 
 	{#if showCollapseButton}
-		<div class="bg-gray-50 p-3 text-center dark:bg-gray-700">
+		<li class="bg-gray-50 p-3 text-center dark:bg-gray-700 list-none">
 			<button class="text-sm text-blue-600 hover:underline dark:text-blue-400" onclick={() => onCollapse()}>
 				Collapse
 			</button>
-		</div>
+		</li>
 	{/if}
-</div>
+</ol>
 
 <style>
 	:global(.release-preview) {

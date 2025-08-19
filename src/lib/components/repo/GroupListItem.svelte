@@ -25,7 +25,7 @@
 	}
 </script>
 
-<div class="border-b first:border-t dark:border-gray-700">
+<li class="border-b first:border-t dark:border-gray-700 list-none">
 	<!-- Collapsed Row / Summary -->
 	<div
 		class="flex cursor-pointer items-center gap-3 px-2 py-3 hover:bg-gray-50 sm:px-3 dark:hover:bg-gray-800/70"
@@ -77,4 +77,4 @@
 			<GroupReleasesList releases={group.releases} {maxHeight} onCollapse={() => (group.isExpanded = false)} />
 		</div>
 	{/if}
-</div>
+</li>
