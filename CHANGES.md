@@ -11,7 +11,7 @@ This document summarizes the changes made to address the requirements:
 
 - Updated the test script to use bun instead of npm:
   ```
-  "test": "bun run test:unit -- --run && bun run test:e2e"
+  "test": "bun run test:unit"
   ```
 
 ### Documentation Updates

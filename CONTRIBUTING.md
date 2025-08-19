@@ -44,14 +44,12 @@ Feature suggestions are welcome! Please create an issue with:
 
 1. Clone your fork of the repository
 2. Install dependencies with `bun install`
-3. Install Playwright browsers with `bunx playwright install`
-4. Start the development server with `bun run dev`
+3. Start the development server with `bun run dev`
 
 ### Project Structure
 
 ```
 reposcoop/
-├── e2e/                # End-to-end tests using Playwright
 ├── src/
 │   ├── lib/            # Library code
 │   │   ├── components/ # UI components
@@ -80,9 +78,6 @@ bun test
 
 # Run only unit tests
 bun run test:unit
-
-# Run only E2E tests
-bun run test:e2e
 ```
 
 ### Commit Messages

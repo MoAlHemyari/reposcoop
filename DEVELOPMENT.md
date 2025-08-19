@@ -67,7 +67,7 @@ bun run preview:timed
 
 ## Testing
 
-RepoScoop uses Vitest for unit tests and Playwright for end-to-end tests.
+RepoScoop uses Vitest for unit tests.
 
 ```bash
 # Run all tests
@@ -75,9 +75,6 @@ bun test
 
 # Run only unit tests
 bun run test:unit
-
-# Run only E2E tests
-bun run test:e2e
 ```
 
 ## Code Quality
@@ -126,5 +123,4 @@ If the development server becomes unresponsive or you encounter other issues:
 If tests are failing unexpectedly:
 
 1. Make sure all dependencies are installed: `bun install`
-2. Ensure Playwright browsers are installed: `bunx playwright install`
-3. Run tests with verbose output: `bun run test:unit -- --verbose`
+2. Run tests with verbose output: `bun run test:unit -- --verbose`

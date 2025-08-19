@@ -51,13 +51,6 @@ Try it with these example repositories:
    yarn install
    ```
 
-3. Install Playwright browsers (for E2E testing)
-   ```bash
-   bunx playwright install
-   # or
-   npx playwright install
-   ```
-
 ### Development
 
 Start the development server:
@@ -71,7 +64,7 @@ bun run dev -- --open
 
 ### Testing
 
-RepoScoop uses Vitest for unit tests and Playwright for E2E tests.
+RepoScoop uses Vitest for unit tests.
 
 ```bash
 # Run all tests
@@ -79,9 +72,6 @@ bun test
 
 # Run only unit tests
 bun run test:unit
-
-# Run only E2E tests
-bun run test:e2e
 ```
 
 ### Building for Production
@@ -103,7 +93,6 @@ RepoScoop is configured to deploy to Cloudflare Pages using the `@sveltejs/adapt
 
 ```
 reposcoop/
-├── e2e/                # End-to-end tests using Playwright
 ├── src/
 │   ├── lib/            # Library code
 │   │   ├── components/ # UI components
