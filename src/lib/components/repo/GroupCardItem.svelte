@@ -65,7 +65,7 @@
 				Latest version: <span class="font-mono">{group.latestRelease.version || group.latestRelease.tag_name}</span>
 			</p>
 			<button
-				class="w-full rounded-md border py-1.5 text-sm hover:bg-gray-50 dark:hover:bg-gray-700"
+				class="btn w-full btn-outline btn-sm"
 				onclick={(e) => {
 					e.stopPropagation();
 					group.isExpanded = true;

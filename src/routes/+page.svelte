@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { Button } from '$lib/components/ui/button';
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import { parseGitHubUrl } from '$lib/utils/github';
@@ -145,7 +144,7 @@
 							</div>
 						</div>
 						<div>
-							<Button type="submit" disabled={isLoading} class="w-full md:w-auto">
+							<button type="submit" disabled={isLoading} class="btn w-full btn-primary md:w-auto">
 								{#if isLoading}
 									<span class="mr-2 inline-block">Loading...</span>
 									<svg class="inline-block h-4 w-4 animate-spin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -159,7 +158,7 @@
 								{:else}
 									View Releases
 								{/if}
-							</Button>
+							</button>
 						</div>
 					</form>
 				</div>
@@ -174,7 +173,7 @@
 							{#each recentRepos as repo (repo.fullName)}
 								<button
 									onclick={() => viewRecentRepo(repo)}
-									class="flex w-full items-center justify-between border-b border-gray-200 p-3 text-left transition-colors last:border-b-0 hover:bg-gray-100 dark:border-gray-700 dark:hover:bg-gray-700"
+									class="btn w-full justify-between border-b border-gray-200 p-3 text-left btn-ghost last:border-b-0 dark:border-gray-700"
 								>
 									<span class="block">
 										<span class="block font-medium">{repo.fullName}</span>
@@ -201,10 +200,7 @@
 					<h3 class="mb-3 text-xl font-semibold">Or try one of these examples:</h3>
 					<div class="grid grid-cols-1 gap-4 md:grid-cols-3">
 						{#each exampleRepos as repo (repo.name)}
-							<button
-								onclick={(e) => tryExampleRepo(e, repo.name)}
-								class="rounded-md border p-4 text-left transition-colors hover:bg-gray-50 dark:hover:bg-gray-700"
-							>
+							<button onclick={(e) => tryExampleRepo(e, repo.name)} class="btn h-auto p-4 text-left btn-outline">
 								<span class="block font-medium">{repo.name}</span>
 								<span class="block text-sm text-gray-600 dark:text-gray-300">{repo.description}</span>
 							</button>

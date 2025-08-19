@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { Button } from '$lib/components/ui/button';
 	import { onMount } from 'svelte';
 	import { fade, fly } from 'svelte/transition';
 	import { fetchReleasesByPage, retryWithBackoff } from '$lib/services/github-api';
@@ -186,7 +185,7 @@
 	</header>
 
 	<div class="mb-4 flex flex-col items-start justify-between gap-3 sm:flex-row">
-		<Button variant="outline" onclick={() => history.back()}>Back</Button>
+		<button class="btn btn-outline" onclick={() => history.back()}>Back</button>
 
 		{#if groupedReleases && !loading && !error}
 			<div class="flex w-full flex-col items-start gap-3 sm:w-auto sm:flex-row sm:items-center">
@@ -203,7 +202,7 @@
 					/>
 					{#if filterText}
 						<button
-							class="absolute top-1/2 right-2 -translate-y-1/2 transform text-gray-400 hover:text-gray-600"
+							class="btn absolute top-1/2 right-2 -translate-y-1/2 transform btn-ghost btn-xs"
 							onclick={() => (filterText = '')}
 							aria-label="Clear filter"
 							tabindex="0"
@@ -222,11 +221,9 @@
 				</div>
 
 				<!-- Sort Controls -->
-				<div class="flex w-full overflow-hidden rounded-md border sm:w-auto" role="group" aria-label="Sort options">
+				<div class="join" role="group" aria-label="Sort options">
 					<button
-						class="flex-1 px-3 py-2 text-sm sm:flex-none {sortBy === 'name'
-							? 'bg-blue-100 dark:bg-blue-900'
-							: 'bg-white dark:bg-gray-800'}"
+						class="btn join-item btn-sm {sortBy === 'name' ? 'btn-active' : ''}"
 						onclick={() => {
 							sortBy = 'name';
 							sortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
@@ -245,9 +242,7 @@
 						Name {sortBy === 'name' ? (sortOrder === 'asc' ? '↑' : '↓') : ''}
 					</button>
 					<button
-						class="flex-1 border-l px-3 py-2 text-sm sm:flex-none {sortBy === 'count'
-							? 'bg-blue-100 dark:bg-blue-900'
-							: 'bg-white dark:bg-gray-800'}"
+						class="btn join-item btn-sm {sortBy === 'count' ? 'btn-active' : ''}"
 						onclick={() => {
 							sortBy = 'count';
 							sortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
@@ -266,9 +261,7 @@
 						Count {sortBy === 'count' ? (sortOrder === 'asc' ? '↑' : '↓') : ''}
 					</button>
 					<button
-						class="flex-1 border-l px-3 py-2 text-sm sm:flex-none {sortBy === 'date'
-							? 'bg-blue-100 dark:bg-blue-900'
-							: 'bg-white dark:bg-gray-800'}"
+						class="btn join-item btn-sm {sortBy === 'date' ? 'btn-active' : ''}"
 						onclick={() => {
 							sortBy = 'date';
 							sortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
@@ -289,11 +282,9 @@
 				</div>
 
 				<!-- View Controls -->
-				<div class="flex w-full overflow-hidden rounded-md border sm:w-auto" role="group" aria-label="View options">
+				<div class="join" role="group" aria-label="View options">
 					<button
-						class="flex-1 px-3 py-2 text-sm sm:flex-none {viewMode === 'list'
-							? 'bg-blue-100 dark:bg-blue-900'
-							: 'bg-white dark:bg-gray-800'}"
+						class="btn join-item btn-sm {viewMode === 'list' ? 'btn-active' : ''}"
 						onclick={() => (viewMode = 'list')}
 						aria-label="List view"
 						aria-pressed={viewMode === 'list'}
@@ -301,9 +292,7 @@
 						List
 					</button>
 					<button
-						class="flex-1 border-l px-3 py-2 text-sm sm:flex-none {viewMode === 'cards'
-							? 'bg-blue-100 dark:bg-blue-900'
-							: 'bg-white dark:bg-gray-800'}"
+						class="btn join-item btn-sm {viewMode === 'cards' ? 'btn-active' : ''}"
 						onclick={() => (viewMode = 'cards')}
 						aria-label="Card view"
 						aria-pressed={viewMode === 'cards'}
@@ -317,13 +306,13 @@
 
 	{#if !loading}
 		<div class="mb-4 flex flex-wrap items-center gap-3">
-			<Button
+			<button
+				class="btn btn-outline"
 				onclick={loadMore}
 				disabled={loadingMore || (lastPage !== null && currentPage >= lastPage)}
-				variant="outline"
 			>
 				{loadingMore ? 'Loading…' : 'Load more releases (2 pages)'}
-			</Button>
+			</button>
 			{#if rateLimitMessage}
 				<span class="text-xs text-amber-600">Rate limit hit: {rateLimitMessage}</span>
 			{/if}
@@ -376,9 +365,9 @@
 						<h2 class="mb-3 text-xl font-semibold text-red-700 dark:text-red-400">Error Loading Repository</h2>
 						<p class="mb-4 max-w-xl text-red-600 dark:text-red-300">{error}</p>
 						<div class="flex justify-center md:justify-start">
-							<Button onclick={handleRetry} variant="outline" class="border-red-300 dark:border-red-700">
+							<button onclick={handleRetry} class="btn border-red-300 btn-outline dark:border-red-700">
 								{retryCount >= maxRetries ? 'Try Again' : `Retry (Attempt ${retryCount + 1}/${maxRetries + 1})`}
-							</Button>
+							</button>
 						</div>
 					</div>
 				</div>

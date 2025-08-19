@@ -9,7 +9,7 @@ RepoScoop solves the pain of navigating releases in large repositories—especia
 1. **Single‑input workflow** – one textbox, one button.
 2. **Smart grouping** – releases organized by detected package name.
 3. **Collapsible drill‑down** – expand a package to see version tags and full release bodies.
-4. **Clean UI** – built with shadcn‑svelte for accessibility and speed.
+4. **Clean UI** – built with daisyUI for modern, accessible components and consistent theming.
 5. **Fast performance** – client-side processing with efficient caching.
 6. **Mobile-friendly** – responsive design works on all devices.
 

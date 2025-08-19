@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { Button } from '$lib/components/ui/button';
 </script>
 
 <div class="container mx-auto p-4">
@@ -9,7 +8,7 @@
 	</header>
 
 	<div class="mb-4">
-		<Button variant="outline" onclick={() => history.back()}>Back</Button>
+		<button class="btn btn-outline" onclick={() => history.back()}>Back</button>
 	</div>
 
 	<div class="prose max-w-none">

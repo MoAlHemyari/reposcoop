@@ -51,7 +51,7 @@
 			{#if release.body}
 				<div class="mt-2 text-sm text-gray-600 dark:text-gray-300">
 					<button
-						class="mb-2 flex items-center gap-1 rounded-sm px-1 text-xs text-blue-600 hover:underline focus:ring-2 focus:ring-blue-500 focus:outline-none dark:text-blue-400"
+						class="btn mb-2 flex items-center gap-1 btn-ghost btn-xs"
 						onclick={() => (release.notesExpanded = !release.notesExpanded)}
 						aria-expanded={release.notesExpanded || false}
 						aria-controls={`notes-${release.id}`}
@@ -97,9 +97,7 @@
 
 	{#if showCollapseButton}
 		<li class="list-none bg-gray-50 p-3 text-center dark:bg-gray-700">
-			<button class="text-sm text-blue-600 hover:underline dark:text-blue-400" onclick={() => onCollapse()}>
-				Collapse
-			</button>
+			<button class="btn btn-ghost btn-sm" onclick={() => onCollapse()}> Collapse </button>
 		</li>
 	{/if}
 </ol>
