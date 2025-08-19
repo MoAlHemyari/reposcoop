@@ -39,20 +39,19 @@
 	>
 		<div class="flex items-center justify-between">
 			<h3 class="truncate font-semibold" title={group.name}>{group.name}</h3>
-			<div class="flex items-center gap-2">
+			<span class="flex items-center gap-2">
 				<span class="rounded-full bg-blue-100 px-2 py-0.5 text-sm text-blue-800 dark:bg-blue-900 dark:text-blue-200">
 					{group.releaseCount}
 				</span>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					class="h-4 w-4 transition-transform duration-200 {group.isExpanded ? 'rotate-180' : ''}"
-					fill="none"
 					viewBox="0 0 24 24"
 					stroke="currentColor"
 				>
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
 				</svg>
-			</div>
+			</span>
 		</div>
 		<p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
 			Latest: {new Date(group.latestRelease.published_at || group.latestRelease.created_at).toLocaleDateString()}

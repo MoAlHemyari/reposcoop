@@ -148,12 +148,7 @@
 							<Button type="submit" disabled={isLoading} class="w-full md:w-auto">
 								{#if isLoading}
 									<span class="mr-2 inline-block">Loading...</span>
-									<svg
-										class="inline-block h-4 w-4 animate-spin"
-										xmlns="http://www.w3.org/2000/svg"
-										fill="none"
-										viewBox="0 0 24 24"
-									>
+									<svg class="inline-block h-4 w-4 animate-spin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 										<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
 										<path
 											class="opacity-75"
@@ -181,16 +176,15 @@
 									onclick={() => viewRecentRepo(repo)}
 									class="flex w-full items-center justify-between border-b border-gray-200 p-3 text-left transition-colors last:border-b-0 hover:bg-gray-100 dark:border-gray-700 dark:hover:bg-gray-700"
 								>
-									<div>
-										<div class="font-medium">{repo.fullName}</div>
-										<div class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+									<span class="block">
+										<span class="block font-medium">{repo.fullName}</span>
+										<span class="mt-1 block text-xs text-gray-500 dark:text-gray-400">
 											Viewed {formatDistanceToNow(new Date(repo.timestamp))}
-										</div>
-									</div>
+										</span>
+									</span>
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
 										class="h-5 w-5 text-gray-400"
-										fill="none"
 										viewBox="0 0 24 24"
 										stroke="currentColor"
 									>
@@ -211,8 +205,8 @@
 								onclick={(e) => tryExampleRepo(e, repo.name)}
 								class="rounded-md border p-4 text-left transition-colors hover:bg-gray-50 dark:hover:bg-gray-700"
 							>
-								<div class="font-medium">{repo.name}</div>
-								<div class="text-sm text-gray-600 dark:text-gray-300">{repo.description}</div>
+								<span class="block font-medium">{repo.name}</span>
+								<span class="block text-sm text-gray-600 dark:text-gray-300">{repo.description}</span>
 							</button>
 						{/each}
 					</div>
