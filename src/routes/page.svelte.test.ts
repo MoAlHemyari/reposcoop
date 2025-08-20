@@ -97,16 +97,4 @@ describe('Home Page', () => {
 		expect(savedRepos[0].owner).toBe('sveltejs');
 		expect(savedRepos[0].repo).toBe('kit');
 	});
-
-	it('should handle example repository clicks', async () => {
-		render(Page);
-
-		const exampleRepo = page.getByText('clerk/javascript');
-		await exampleRepo.click();
-
-		// Wait for the timeout in the component
-		await new Promise((resolve) => setTimeout(resolve, 600));
-
-		expect(navigation.goto).toHaveBeenCalledWith('/r/clerk/javascript');
-	});
 });

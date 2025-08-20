@@ -11,22 +11,10 @@
 		timestamp: string; // ISO string
 	};
 
-	type ExampleRepo = {
-		name: string;
-		description: string;
-	};
-
 	let repoUrl = $state<string>('');
 	let isLoading = $state<boolean>(false);
 	let validationError = $state<string>('');
 	let recentRepos = $state<RecentRepo[]>([]);
-
-	// Example repositories to try
-	const exampleRepos: ExampleRepo[] = [
-		{ name: 'clerk/javascript', description: 'Authentication library with multiple packages' },
-		{ name: 'vercel/next.js', description: 'React framework with many releases' },
-		{ name: 'sveltejs/kit', description: 'Svelte application framework' }
-	];
 
 	// Load recently viewed repositories from localStorage on component mount
 	onMount((): void => {
@@ -87,11 +75,6 @@
 		}
 	}
 
-	function tryExampleRepo(event: Event, repo: string): void {
-		repoUrl = `https://github.com/${repo}`;
-		handleSubmit(event);
-	}
-
 	function viewRecentRepo(repo: RecentRepo): void {
 		goto(`/r/${repo.owner}/${repo.repo}`);
 	}
@@ -134,8 +117,8 @@
 									type="text"
 									bind:value={repoUrl}
 									placeholder="https://github.com/owner/repo"
-									class="w-full rounded-md border p-3 pr-12 transition-colors focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
-									class:border-red-500={validationError}
+									class="input-bordered input w-full pr-12"
+									class:input-error={validationError}
 									disabled={isLoading}
 								/>
 								{#if validationError}
@@ -166,24 +149,39 @@
 				<!-- Recently Viewed Repositories -->
 				{#if recentRepos.length > 0}
 					<div class="mx-auto mb-8 max-w-2xl">
-						<h3 class="mb-3 text-xl font-semibold">Recently Viewed</h3>
-						<div
-							class="overflow-hidden rounded-lg border border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-800"
-						>
+						<h3 class="mb-3 flex items-center gap-2 text-xl font-semibold">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								class="h-5 w-5"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+								/>
+							</svg>
+							Recently Viewed
+						</h3>
+						<div class="space-y-2">
 							{#each recentRepos as repo (repo.fullName)}
 								<button
 									onclick={() => viewRecentRepo(repo)}
-									class="btn w-full justify-between border-b border-gray-200 p-3 text-left btn-ghost last:border-b-0 dark:border-gray-700"
+									class="btn h-auto w-full justify-between p-4 normal-case btn-ghost"
 								>
-									<span class="block">
+									<span class="text-left">
 										<span class="block font-medium">{repo.fullName}</span>
-										<span class="mt-1 block text-xs text-gray-500 dark:text-gray-400">
-											Viewed {formatDistanceToNow(new Date(repo.timestamp))}
+										<span class="block text-sm opacity-70">
+											Viewed {formatDistanceToNow(new Date(repo.timestamp))} ago
 										</span>
 									</span>
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
-										class="h-5 w-5 text-gray-400"
+										class="h-4 w-4 opacity-50"
+										fill="none"
 										viewBox="0 0 24 24"
 										stroke="currentColor"
 									>
@@ -194,19 +192,6 @@
 						</div>
 					</div>
 				{/if}
-
-				<!-- Example Repositories -->
-				<div class="mx-auto mb-12 max-w-2xl">
-					<h3 class="mb-3 text-xl font-semibold">Or try one of these examples:</h3>
-					<div class="grid grid-cols-1 gap-4 md:grid-cols-3">
-						{#each exampleRepos as repo (repo.name)}
-							<button onclick={(e) => tryExampleRepo(e, repo.name)} class="btn h-auto p-4 text-left btn-outline">
-								<span class="block font-medium">{repo.name}</span>
-								<span class="block text-sm text-gray-600 dark:text-gray-300">{repo.description}</span>
-							</button>
-						{/each}
-					</div>
-				</div>
 
 				<!-- How It Works Section -->
 				<div class="mx-auto max-w-4xl">
