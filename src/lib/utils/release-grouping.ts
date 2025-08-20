@@ -12,49 +12,49 @@ import type { Release } from '$lib/services/repo-api';
  * Interface for a grouped release
  */
 export interface GroupedRelease extends Release {
-	packageName: string;
-	version: string;
-	sortKey: string; // Used for sorting within a package group
-	notesExpanded?: boolean; // Whether the release notes are expanded
+  packageName: string;
+  version: string;
+  sortKey: string; // Used for sorting within a package group
+  notesExpanded?: boolean; // Whether the release notes are expanded
 }
 
 /**
  * Interface for a package group
  */
 export interface PackageGroup {
-	name: string;
-	releases: GroupedRelease[];
-	latestRelease: GroupedRelease;
-	releaseCount: number;
-	isExpanded?: boolean;
+  name: string;
+  releases: GroupedRelease[];
+  latestRelease: GroupedRelease;
+  releaseCount: number;
+  isExpanded?: boolean;
 }
 
 /**
  * Interface for grouped releases result
  */
 export interface GroupedReleases {
-	groups: PackageGroup[];
-	totalReleases: number;
+  groups: PackageGroup[];
+  totalReleases: number;
 }
 
 /**
  * Common patterns for package names in release titles
  */
 const PACKAGE_PATTERNS = [
-	// @scope/package@version pattern (e.g., @clerk/nextjs@4.23.2)
-	/^@([a-zA-Z0-9-]+)\/([a-zA-Z0-9-]+)@(.*?)$/,
+  // @scope/package@version pattern (e.g., @clerk/nextjs@4.23.2)
+  /^@([a-zA-Z0-9-]+)\/([a-zA-Z0-9-]+)@(.*?)$/,
 
-	// package@version pattern (e.g., nextjs@4.23.2)
-	/^([a-zA-Z0-9-]+)@(.*?)$/,
+  // package@version pattern (e.g., nextjs@4.23.2)
+  /^([a-zA-Z0-9-]+)@(.*?)$/,
 
-	// v1.2.3 (packageName) pattern
-	/^v?(\d+\.\d+\.\d+(?:-[a-zA-Z0-9.-]+)?)(?:\s+\(([a-zA-Z0-9-]+)\))?$/,
+  // v1.2.3 (packageName) pattern
+  /^v?(\d+\.\d+\.\d+(?:-[a-zA-Z0-9.-]+)?)(?:\s+\(([a-zA-Z0-9-]+)\))?$/,
 
-	// packageName v1.2.3 pattern
-	/^([a-zA-Z0-9-]+)\s+v?(\d+\.\d+\.\d+(?:-[a-zA-Z0-9.-]+)?)$/,
+  // packageName v1.2.3 pattern
+  /^([a-zA-Z0-9-]+)\s+v?(\d+\.\d+\.\d+(?:-[a-zA-Z0-9.-]+)?)$/,
 
-	// packageName-1.2.3 pattern
-	/^([a-zA-Z0-9-]+)-(\d+\.\d+\.\d+(?:-[a-zA-Z0-9.-]+)?)$/
+  // packageName-1.2.3 pattern
+  /^([a-zA-Z0-9-]+)-(\d+\.\d+\.\d+(?:-[a-zA-Z0-9.-]+)?)$/,
 ];
 
 /**
@@ -64,72 +64,72 @@ const PACKAGE_PATTERNS = [
  * @returns Object with packageName and version, or null if no pattern matches
  */
 export function extractPackageInfo(title: string): { packageName: string; version: string } | null {
-	if (!title) return null;
+  if (!title) return null;
 
-	// Try each pattern
-	for (const pattern of PACKAGE_PATTERNS) {
-		const match = title.match(pattern);
+  // Try each pattern
+  for (const pattern of PACKAGE_PATTERNS) {
+    const match = title.match(pattern);
 
-		if (match) {
-			// Handle different patterns
-			if (pattern.toString().includes('@([a-zA-Z0-9-]+)\\/')) {
-				// @scope/package@version pattern
-				return {
-					packageName: `@${match[1]}/${match[2]}`,
-					version: match[3]
-				};
-			} else if (pattern.toString().includes('([a-zA-Z0-9-]+)@')) {
-				// package@version pattern
-				return {
-					packageName: match[1],
-					version: match[2]
-				};
-			} else if (pattern.toString().includes('\\(([a-zA-Z0-9-]+)\\)')) {
-				// v1.2.3 (packageName) pattern
-				return {
-					packageName: match[2] || 'default',
-					version: match[1]
-				};
-			} else if (pattern.toString().includes('([a-zA-Z0-9-]+)\\s+v?')) {
-				// packageName v1.2.3 pattern
-				return {
-					packageName: match[1],
-					version: match[2]
-				};
-			} else if (pattern.toString().includes('([a-zA-Z0-9-]+)-(\\d+')) {
-				// packageName-1.2.3 pattern
-				return {
-					packageName: match[1],
-					version: match[2]
-				};
-			}
-		}
-	}
+    if (match) {
+      // Handle different patterns
+      if (pattern.toString().includes('@([a-zA-Z0-9-]+)\\/')) {
+        // @scope/package@version pattern
+        return {
+          packageName: `@${match[1]}/${match[2]}`,
+          version: match[3],
+        };
+      } else if (pattern.toString().includes('([a-zA-Z0-9-]+)@')) {
+        // package@version pattern
+        return {
+          packageName: match[1],
+          version: match[2],
+        };
+      } else if (pattern.toString().includes('\\(([a-zA-Z0-9-]+)\\)')) {
+        // v1.2.3 (packageName) pattern
+        return {
+          packageName: match[2] || 'default',
+          version: match[1],
+        };
+      } else if (pattern.toString().includes('([a-zA-Z0-9-]+)\\s+v?')) {
+        // packageName v1.2.3 pattern
+        return {
+          packageName: match[1],
+          version: match[2],
+        };
+      } else if (pattern.toString().includes('([a-zA-Z0-9-]+)-(\\d+')) {
+        // packageName-1.2.3 pattern
+        return {
+          packageName: match[1],
+          version: match[2],
+        };
+      }
+    }
+  }
 
-	// If no pattern matches, try to extract from the first part of the title
-	const parts = title.split(/[\s-]/);
-	if (parts.length > 1) {
-		const first = parts[0];
-		// Treat version-like or generic 'Version' prefixes as default
-		if (first.toLowerCase() === 'version' || first.toLowerCase() === 'v' || /^\d+(?:\.\d+){1,3}$/.test(first)) {
-			return {
-				packageName: 'default',
-				version: title.replace(/^version\s+|^v\s+/i, '').trim()
-			};
-		}
+  // If no pattern matches, try to extract from the first part of the title
+  const parts = title.split(/[\s-]/);
+  if (parts.length > 1) {
+    const first = parts[0];
+    // Treat version-like or generic 'Version' prefixes as default
+    if (first.toLowerCase() === 'version' || first.toLowerCase() === 'v' || /^\d+(?:\.\d+){1,3}$/.test(first)) {
+      return {
+        packageName: 'default',
+        version: title.replace(/^version\s+|^v\s+/i, '').trim(),
+      };
+    }
 
-		// Use the first part as the package name
-		return {
-			packageName: first,
-			version: title.replace(first, '').trim()
-		};
-	}
+    // Use the first part as the package name
+    return {
+      packageName: first,
+      version: title.replace(first, '').trim(),
+    };
+  }
 
-	// If all else fails, use the entire title as the package name
-	return {
-		packageName: 'default',
-		version: title
-	};
+  // If all else fails, use the entire title as the package name
+  return {
+    packageName: 'default',
+    version: title,
+  };
 }
 
 /**
@@ -139,26 +139,26 @@ export function extractPackageInfo(title: string): { packageName: string; versio
  * @returns Array of detected package name patterns
  */
 export function detectPackagePatterns(releases: Release[]): string[] {
-	const patterns = new Set<string>();
+  const patterns = new Set<string>();
 
-	for (const release of releases) {
-		const tagInfo = extractPackageInfo(release.tag_name);
-		const nameInfo = extractPackageInfo(release.name);
+  for (const release of releases) {
+    const tagInfo = extractPackageInfo(release.tag_name);
+    const nameInfo = extractPackageInfo(release.name);
 
-		if (tagInfo?.packageName && tagInfo.packageName !== 'default' && tagInfo.packageName.toLowerCase() !== 'version') {
-			patterns.add(tagInfo.packageName);
-		}
+    if (tagInfo?.packageName && tagInfo.packageName !== 'default' && tagInfo.packageName.toLowerCase() !== 'version') {
+      patterns.add(tagInfo.packageName);
+    }
 
-		if (
-			nameInfo?.packageName &&
-			nameInfo.packageName !== 'default' &&
-			nameInfo.packageName.toLowerCase() !== 'version'
-		) {
-			patterns.add(nameInfo.packageName);
-		}
-	}
+    if (
+      nameInfo?.packageName &&
+      nameInfo.packageName !== 'default' &&
+      nameInfo.packageName.toLowerCase() !== 'version'
+    ) {
+      patterns.add(nameInfo.packageName);
+    }
+  }
 
-	return Array.from(patterns);
+  return Array.from(patterns);
 }
 
 /**
@@ -169,98 +169,98 @@ export function detectPackagePatterns(releases: Release[]): string[] {
  * @returns Grouped releases object
  */
 export function groupReleasesByPackage(releases: Release[], repoName?: string): GroupedReleases {
-	// Process each release
-	const groupedReleases: GroupedRelease[] = releases.map((release) => {
-		// Try to extract package info from tag name first; fall back to release name only if tag is unusable
-		let packageInfo = extractPackageInfo(release.tag_name);
+  // Process each release
+  const groupedReleases: GroupedRelease[] = releases.map((release) => {
+    // Try to extract package info from tag name first; fall back to release name only if tag is unusable
+    let packageInfo = extractPackageInfo(release.tag_name);
 
-		if (!packageInfo) {
-			packageInfo = extractPackageInfo(release.name);
-		} else if (packageInfo.packageName === 'default') {
-			const nameInfo = extractPackageInfo(release.name);
-			if (
-				nameInfo &&
-				nameInfo.packageName &&
-				nameInfo.packageName !== 'default' &&
-				nameInfo.packageName.toLowerCase() !== 'version'
-			) {
-				packageInfo = nameInfo;
-			}
-		}
+    if (!packageInfo) {
+      packageInfo = extractPackageInfo(release.name);
+    } else if (packageInfo.packageName === 'default') {
+      const nameInfo = extractPackageInfo(release.name);
+      if (
+        nameInfo &&
+        nameInfo.packageName &&
+        nameInfo.packageName !== 'default' &&
+        nameInfo.packageName.toLowerCase() !== 'version'
+      ) {
+        packageInfo = nameInfo;
+      }
+    }
 
-		// If still no package info, use default
-		if (!packageInfo) {
-			packageInfo = {
-				packageName: 'default',
-				version: release.tag_name || release.name
-			};
-		}
+    // If still no package info, use default
+    if (!packageInfo) {
+      packageInfo = {
+        packageName: 'default',
+        version: release.tag_name || release.name,
+      };
+    }
 
-		// Create a sort key for version sorting (ISO date for now)
-		const sortKey = release.published_at || release.created_at;
+    // Create a sort key for version sorting (ISO date for now)
+    const sortKey = release.published_at || release.created_at;
 
-		return {
-			...release,
-			packageName: packageInfo.packageName,
-			version: packageInfo.version,
-			sortKey,
-			notesExpanded: false // Initialize as collapsed
-		};
-	});
+    return {
+      ...release,
+      packageName: packageInfo.packageName,
+      version: packageInfo.version,
+      sortKey,
+      notesExpanded: false, // Initialize as collapsed
+    };
+  });
 
-	// Determine repo group name
-	const repoGroupName = repoName && repoName.trim().length > 0 ? repoName : 'repository';
-	// Consider patterns meaningful if there is at least one non-default release
-	const nonDefaultCount = groupedReleases.filter(
-		(r) => r.packageName && r.packageName !== 'default' && r.packageName.toLowerCase() !== 'version'
-	).length;
-	const hasPatterns = nonDefaultCount >= 1;
+  // Determine repo group name
+  const repoGroupName = repoName && repoName.trim().length > 0 ? repoName : 'repository';
+  // Consider patterns meaningful if there is at least one non-default release
+  const nonDefaultCount = groupedReleases.filter(
+    (r) => r.packageName && r.packageName !== 'default' && r.packageName.toLowerCase() !== 'version',
+  ).length;
+  const hasPatterns = nonDefaultCount >= 1;
 
-	// Group by computed group key
-	const groupMap = new Map<string, GroupedRelease[]>();
+  // Group by computed group key
+  const groupMap = new Map<string, GroupedRelease[]>();
 
-	for (const release of groupedReleases) {
-		let pkg = release.packageName;
-		if (pkg.toLowerCase() === 'version') {
-			pkg = 'default';
-			release.packageName = 'default';
-		}
+  for (const release of groupedReleases) {
+    let pkg = release.packageName;
+    if (pkg.toLowerCase() === 'version') {
+      pkg = 'default';
+      release.packageName = 'default';
+    }
 
-		const groupKey = !hasPatterns || pkg === 'default' ? repoGroupName : release.packageName;
+    const groupKey = !hasPatterns || pkg === 'default' ? repoGroupName : release.packageName;
 
-		if (!groupMap.has(groupKey)) {
-			groupMap.set(groupKey, []);
-		}
-		groupMap.get(groupKey)!.push(release);
-	}
+    if (!groupMap.has(groupKey)) {
+      groupMap.set(groupKey, []);
+    }
+    groupMap.get(groupKey)!.push(release);
+  }
 
-	// Sort releases within each group by date (newest first)
-	for (const [key, rels] of groupMap.entries()) {
-		groupMap.set(
-			key,
-			rels.sort((a, b) => new Date(b.sortKey).getTime() - new Date(a.sortKey).getTime())
-		);
-	}
+  // Sort releases within each group by date (newest first)
+  for (const [key, rels] of groupMap.entries()) {
+    groupMap.set(
+      key,
+      rels.sort((a, b) => new Date(b.sortKey).getTime() - new Date(a.sortKey).getTime()),
+    );
+  }
 
-	// Create package groups from map entries
-	const groups: PackageGroup[] = [];
-	for (const [name, rels] of groupMap.entries()) {
-		groups.push({
-			name,
-			releases: rels,
-			latestRelease: rels[0],
-			releaseCount: rels.length,
-			isExpanded: false
-		});
-	}
+  // Create package groups from map entries
+  const groups: PackageGroup[] = [];
+  for (const [name, rels] of groupMap.entries()) {
+    groups.push({
+      name,
+      releases: rels,
+      latestRelease: rels[0],
+      releaseCount: rels.length,
+      isExpanded: false,
+    });
+  }
 
-	// Sort groups alphabetically by name
-	groups.sort((a, b) => a.name.localeCompare(b.name));
+  // Sort groups alphabetically by name
+  groups.sort((a, b) => a.name.localeCompare(b.name));
 
-	return {
-		groups,
-		totalReleases: groupedReleases.length
-	};
+  return {
+    groups,
+    totalReleases: groupedReleases.length,
+  };
 }
 
 /**
@@ -272,32 +272,32 @@ export function groupReleasesByPackage(releases: Release[], repoName?: string): 
  * @returns Sorted array of package groups
  */
 export function sortPackageGroups(
-	groups: PackageGroup[],
-	sortBy: 'name' | 'count' | 'date' = 'name',
-	sortOrder: 'asc' | 'desc' = 'asc'
+  groups: PackageGroup[],
+  sortBy: 'name' | 'count' | 'date' = 'name',
+  sortOrder: 'asc' | 'desc' = 'asc',
 ): PackageGroup[] {
-	const sortedGroups = [...groups];
+  const sortedGroups = [...groups];
 
-	switch (sortBy) {
-		case 'name':
-			sortedGroups.sort((a, b) => a.name.localeCompare(b.name));
-			break;
-		case 'count':
-			sortedGroups.sort((a, b) => a.releaseCount - b.releaseCount);
-			break;
-		case 'date':
-			sortedGroups.sort((a, b) => {
-				const dateA = new Date(a.latestRelease.published_at || a.latestRelease.created_at);
-				const dateB = new Date(b.latestRelease.published_at || b.latestRelease.created_at);
-				return dateA.getTime() - dateB.getTime();
-			});
-			break;
-	}
+  switch (sortBy) {
+    case 'name':
+      sortedGroups.sort((a, b) => a.name.localeCompare(b.name));
+      break;
+    case 'count':
+      sortedGroups.sort((a, b) => a.releaseCount - b.releaseCount);
+      break;
+    case 'date':
+      sortedGroups.sort((a, b) => {
+        const dateA = new Date(a.latestRelease.published_at || a.latestRelease.created_at);
+        const dateB = new Date(b.latestRelease.published_at || b.latestRelease.created_at);
+        return dateA.getTime() - dateB.getTime();
+      });
+      break;
+  }
 
-	// Reverse if descending order
-	if (sortOrder === 'desc') {
-		sortedGroups.reverse();
-	}
+  // Reverse if descending order
+  if (sortOrder === 'desc') {
+    sortedGroups.reverse();
+  }
 
-	return sortedGroups;
+  return sortedGroups;
 }

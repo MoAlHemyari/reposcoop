@@ -36,64 +36,64 @@
  * This is a platform-agnostic representation of a release
  */
 export interface Release {
-	id: number | string;
-	url: string;
-	html_url: string;
-	tag_name: string;
-	name: string;
-	draft: boolean;
-	prerelease: boolean;
-	created_at: string;
-	published_at: string;
-	body: string;
-	author: {
-		login: string;
-		avatar_url: string;
-		html_url: string;
-	};
+  id: number | string;
+  url: string;
+  html_url: string;
+  tag_name: string;
+  name: string;
+  draft: boolean;
+  prerelease: boolean;
+  created_at: string;
+  published_at: string;
+  body: string;
+  author: {
+    login: string;
+    avatar_url: string;
+    html_url: string;
+  };
 }
 
 /**
  * Interface for API response metadata
  */
 export interface ApiResponseMeta {
-	rateLimit: {
-		limit: number;
-		remaining: number;
-		reset: number;
-	};
-	lastPage: number;
-	totalCount?: number;
+  rateLimit: {
+    limit: number;
+    remaining: number;
+    reset: number;
+  };
+  lastPage: number;
+  totalCount?: number;
 }
 
 /**
  * Interface for API response with releases and metadata
  */
 export interface ApiResponse {
-	releases: Release[];
-	meta: ApiResponseMeta;
+  releases: Release[];
+  meta: ApiResponseMeta;
 }
 
 /**
  * Interface for repository API providers
  */
 export interface RepoApiProvider {
-	/**
-	 * Fetches all releases for a repository
-	 *
-	 * @param owner - Repository owner
-	 * @param repo - Repository name
-	 * @returns Promise with all releases and metadata
-	 */
-	fetchAllReleases(owner: string, repo: string): Promise<ApiResponse>;
+  /**
+   * Fetches all releases for a repository
+   *
+   * @param owner - Repository owner
+   * @param repo - Repository name
+   * @returns Promise with all releases and metadata
+   */
+  fetchAllReleases(owner: string, repo: string): Promise<ApiResponse>;
 
-	/**
-	 * Retries a failed API request with exponential backoff
-	 *
-	 * @param fn - Function to retry
-	 * @param retries - Maximum number of retries
-	 * @param delay - Initial delay in milliseconds
-	 * @returns Promise with the result of the function
-	 */
-	retryWithBackoff<T>(fn: () => Promise<T>, retries?: number, delay?: number): Promise<T>;
+  /**
+   * Retries a failed API request with exponential backoff
+   *
+   * @param fn - Function to retry
+   * @param retries - Maximum number of retries
+   * @param delay - Initial delay in milliseconds
+   * @returns Promise with the result of the function
+   */
+  retryWithBackoff<T>(fn: () => Promise<T>, retries?: number, delay?: number): Promise<T>;
 }

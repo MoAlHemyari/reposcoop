@@ -6,5 +6,5 @@ import { twMerge } from 'tailwind-merge';
  * This is a utility function used by shadcn-svelte components.
  */
 export function cn(...inputs: ClassValue[]) {
-	return twMerge(clsx(inputs));
+  return twMerge(clsx(inputs));
 }

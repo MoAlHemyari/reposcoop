@@ -93,13 +93,13 @@ import { render } from 'vitest-browser-svelte';
 import MyComponent from './MyComponent.svelte';
 
 describe('MyComponent', () => {
-	it('should render without errors', () => {
-		expect(() => {
-			render(MyComponent, {
-				/* props */
-			});
-		}).not.toThrow();
-	});
+  it('should render without errors', () => {
+    expect(() => {
+      render(MyComponent, {
+        /* props */
+      });
+    }).not.toThrow();
+  });
 });
 ```
 
@@ -112,12 +112,12 @@ import { render } from 'vitest-browser-svelte';
 import MyComponent from './MyComponent.svelte';
 
 describe('MyComponent', () => {
-	it('should render a heading', async () => {
-		render(MyComponent);
+  it('should render a heading', async () => {
+    render(MyComponent);
 
-		const heading = page.getByRole('heading', { level: 1 });
-		await expect.element(heading).toBeInTheDocument();
-	});
+    const heading = page.getByRole('heading', { level: 1 });
+    await expect.element(heading).toBeInTheDocument();
+  });
 });
 ```
 
@@ -131,8 +131,8 @@ E2E tests are located in the `e2e` directory and use Playwright. They run agains
 import { expect, test } from '@playwright/test';
 
 test('home page has expected heading', async ({ page }) => {
-	await page.goto('/');
-	await expect(page.locator('h1')).toBeVisible();
+  await page.goto('/');
+  await expect(page.locator('h1')).toBeVisible();
 });
 ```
 

@@ -175,12 +175,12 @@ These examples showcase the exact structure of GitHub API responses that RepoSco
 
 ```json
 {
-	"url": "https://api.github.com/repos/clerk/javascript/releases/228021514",
-	"html_url": "https://github.com/clerk/javascript/releases/tag/%40clerk/chrome-extension%402.5.1",
-	"tag_name": "@clerk/chrome-extension@2.5.1",
-	"name": "@clerk/chrome-extension@2.5.1",
-	"published_at": "2025-06-26T13:45:37Z",
-	"body": "### Patch Changes\n\n- Updated dependencies..."
+  "url": "https://api.github.com/repos/clerk/javascript/releases/228021514",
+  "html_url": "https://github.com/clerk/javascript/releases/tag/%40clerk/chrome-extension%402.5.1",
+  "tag_name": "@clerk/chrome-extension@2.5.1",
+  "name": "@clerk/chrome-extension@2.5.1",
+  "published_at": "2025-06-26T13:45:37Z",
+  "body": "### Patch Changes\n\n- Updated dependencies..."
 }
 ```
 
