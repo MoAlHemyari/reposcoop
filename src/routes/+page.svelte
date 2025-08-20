@@ -83,16 +83,17 @@
 <div class="flex min-h-screen flex-col">
   <main class="flex-grow">
     <!-- Hero Section -->
-    <section class="bg-gradient-to-b from-blue-50 to-white py-12 md:py-20 dark:from-gray-900 dark:to-gray-800">
-      <div class="container mx-auto px-4">
-        <div class="mx-auto max-w-4xl text-center">
-          <h1
-            class="mb-6 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-4xl font-bold text-transparent md:text-5xl"
-          >
-            Welcome to RepoScoop 📦🔍
+    <section class="hero bg-gradient-to-b from-base-200 to-base-100">
+      <div class="hero-content py-12 text-center md:py-20">
+        <div class="max-w-4xl">
+          <h1 class="mb-6 text-4xl font-bold md:text-5xl">
+            <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+              Welcome to RepoScoop
+            </span>
+            <span class="ml-2">📦🔍</span>
           </h1>
           <p class="mb-4 text-xl md:text-2xl">Skim GitHub release notes in a single glance.</p>
-          <p class="mx-auto mb-8 max-w-2xl text-lg text-gray-600 dark:text-gray-300">
+          <p class="mx-auto mb-8 max-w-2xl text-lg text-base-content/70">
             Paste any GitHub repo URL and get an instant, collapsible view of each package's versions, grouped by
             package name for quick scanning.
           </p>
