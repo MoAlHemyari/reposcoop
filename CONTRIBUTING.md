@@ -55,7 +55,6 @@ reposcoop/
 │   │   ├── components/ # UI components
 │   │   └── utils/      # Utility functions
 │   ├── routes/         # SvelteKit routes
-│   │   ├── about/      # About page
 │   │   └── r/          # Repository view pages
 │   └── app.css         # Global styles
 └── static/             # Static assets

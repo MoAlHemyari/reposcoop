@@ -239,9 +239,8 @@
           <p class="text-gray-600 dark:text-gray-300">© 2025 RepoScoop. All rights reserved.</p>
         </div>
         <nav class="flex gap-6">
-          <a href="/about" class="text-blue-600 hover:underline dark:text-blue-400">About</a>
           <a
-            href="https://github.com/your-username/reposcoop"
+            href="https://github.com/aqeelat/reposcoop"
             target="_blank"
             rel="noopener noreferrer"
             class="text-blue-600 hover:underline dark:text-blue-400">GitHub</a
