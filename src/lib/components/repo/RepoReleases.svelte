@@ -28,8 +28,8 @@
   // Pagination state
   let currentPage = $state(0);
   let lastPage = $state<number | null>(null);
-  const initialPagesToLoad = 5;
-  const pagesPerClick = 2;
+  const initialPagesToLoad = 1;
+  const pagesPerClick = 1;
   let rateLimitMessage = $state<string | null>(null);
   let rateLimitHitOnFirst = $state(false);
 
@@ -311,7 +311,7 @@
         onclick={loadMore}
         disabled={loadingMore || (lastPage !== null && currentPage >= lastPage)}
       >
-        {loadingMore ? 'Loading…' : 'Load more releases (2 pages)'}
+        {loadingMore ? 'Loading…' : 'Load more'}
       </button>
       {#if rateLimitMessage}
         <span class="text-xs text-amber-600">Rate limit hit: {rateLimitMessage}</span>
