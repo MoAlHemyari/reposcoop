@@ -46,12 +46,7 @@
   // Fetch releases by pages with pagination
   async function fetchPage(pageNumber: number): Promise<boolean> {
     try {
-      let resp: ApiResponse;
-      if (typeof githubApi.retryWithBackoff !== 'function') {
-        resp = await githubApi.fetchReleasesPage(owner, repo, pageNumber);
-      } else {
-        resp = await githubApi.retryWithBackoff(() => githubApi.fetchReleasesPage(owner, repo, pageNumber), 3);
-      }
+      const resp = await githubApi.retryWithBackoff(() => githubApi.fetchReleasesPage(owner, repo, pageNumber));
       // Update lastPage from response if not set yet
       lastPage = resp.meta.lastPage ?? lastPage;
       apiResponse = resp; // keep latest meta/rate info
