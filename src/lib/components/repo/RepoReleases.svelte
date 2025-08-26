@@ -22,8 +22,6 @@
   let releases = $state<Release[]>([]);
   let apiResponse = $state<ApiResponse | null>(null);
   let groupedReleases = $state<GroupedReleases | null>(null);
-  let retryCount = $state(0);
-  const maxRetries = 3;
 
   // Pagination state
   let currentPage = $state(0);
@@ -52,7 +50,7 @@
       if (typeof githubApi.retryWithBackoff !== 'function') {
         resp = await githubApi.fetchReleasesPage(owner, repo, pageNumber);
       } else {
-        resp = await githubApi.retryWithBackoff(() => githubApi.fetchReleasesPage(owner, repo, pageNumber), maxRetries);
+        resp = await githubApi.retryWithBackoff(() => githubApi.fetchReleasesPage(owner, repo, pageNumber), 3);
       }
       // Update lastPage from response if not set yet
       lastPage = resp.meta.lastPage ?? lastPage;
@@ -146,12 +144,6 @@
       updateSortedGroups();
     }
   });
-
-  // Retry fetching releases (re-run initial load)
-  function handleRetry() {
-    retryCount++;
-    initialLoad();
-  }
 
   // Fetch releases on component mount
   onMount(() => {
@@ -364,11 +356,6 @@
           <div class="flex-grow text-center md:text-left">
             <h2 class="mb-3 text-xl font-semibold text-red-700 dark:text-red-400">Error Loading Repository</h2>
             <p class="mb-4 max-w-xl text-red-600 dark:text-red-300">{error}</p>
-            <div class="flex justify-center md:justify-start">
-              <button onclick={handleRetry} class="btn border-red-300 btn-outline dark:border-red-700">
-                {retryCount >= maxRetries ? 'Try Again' : `Retry (Attempt ${retryCount + 1}/${maxRetries + 1})`}
-              </button>
-            </div>
           </div>
         </div>
       </div>
