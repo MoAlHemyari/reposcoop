@@ -71,7 +71,7 @@ export class GitHubApiProvider implements RepoApiProvider {
         }
 
         if (response.status === 404) {
-          throw new Error(`Repository ${owner}/${repo} not found`);
+          throw new Error(`Repository ${owner}/${repo} not found. It may be private or doesn't exist.`);
         }
 
         throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
@@ -109,6 +109,11 @@ export class GitHubApiProvider implements RepoApiProvider {
       return await fn();
     } catch (error) {
       if (retries === 0) {
+        throw error;
+      }
+
+      // Don't retry on 404 errors (repository not found or private)
+      if (error instanceof Error && error.message.includes('not found')) {
         throw error;
       }
 

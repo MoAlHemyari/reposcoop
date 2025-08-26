@@ -110,8 +110,10 @@ describe('GitHub API Service', () => {
         },
       });
 
-      // Expect the function to throw an error
-      await expect(githubApi.fetchReleasesPage('test', 'repo')).rejects.toThrow('Repository test/repo not found');
+      // Expect the function to throw an error with updated message
+      await expect(githubApi.fetchReleasesPage('test', 'repo')).rejects.toThrow(
+        "Repository test/repo not found. It may be private or doesn't exist.",
+      );
     });
 
     it('should handle rate limit errors correctly', async () => {
@@ -180,6 +182,27 @@ describe('GitHub API Service', () => {
 
       // Function should be called exactly maxRetries + 1 times
       expect(mockFn).toHaveBeenCalledTimes(3);
+    });
+
+    it('should not retry on 404 errors', async () => {
+      const mockFn = vi.fn();
+
+      // Mock a 404 error (repository not found)
+      mockFn.mockRejectedValue(new Error("Repository test/repo not found. It may be private or doesn't exist."));
+
+      // Mock setTimeout to avoid waiting in tests
+      vi.spyOn(globalThis, 'setTimeout').mockImplementation((callback: () => void) => {
+        callback();
+        return 0 as unknown as NodeJS.Timeout;
+      });
+
+      // Expect the function to throw immediately without retries
+      await expect(githubApi.retryWithBackoff(mockFn, 3, 10)).rejects.toThrow(
+        "Repository test/repo not found. It may be private or doesn't exist.",
+      );
+
+      // Function should be called only once (no retries)
+      expect(mockFn).toHaveBeenCalledTimes(1);
     });
   });
 });
