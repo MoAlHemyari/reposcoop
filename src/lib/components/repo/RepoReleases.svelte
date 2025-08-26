@@ -172,8 +172,6 @@
   </header>
 
   <div class="mb-4 flex flex-col items-start justify-between gap-3 sm:flex-row">
-    <button class="btn btn-outline" onclick={() => history.back()}>Back</button>
-
     {#if groupedReleases && !loading && !error}
       <div class="flex w-full flex-col items-start gap-3 sm:w-auto sm:flex-row sm:items-center">
         <!-- Filter Input -->
