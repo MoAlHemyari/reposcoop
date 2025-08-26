@@ -89,6 +89,30 @@ bun run preview
 
 RepoScoop is configured to deploy to Cloudflare Pages using the `@sveltejs/adapter-cloudflare` adapter. No additional configuration is needed for basic deployment.
 
+## Analytics Configuration
+
+RepoScoop supports [Umami](https://umami.is/) analytics for tracking website usage. To enable analytics:
+
+1. Copy the example environment file:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Configure your Umami settings in `.env`:
+
+   ```bash
+   # Required: Your Umami website ID
+   PUBLIC_UMAMI_WEBSITE_ID=your-website-id-here
+
+   # Required: URL to your Umami script
+   PUBLIC_UMAMI_SCRIPT_URL=https://your-umami-instance.com/script.js
+   ```
+
+3. Rebuild and redeploy the application
+
+The analytics will only load when both `PUBLIC_UMAMI_WEBSITE_ID` and `PUBLIC_UMAMI_SCRIPT_URL` are configured. If these variables are not set, no analytics scripts will be loaded.
+
 ## Project Structure
 
 ```
