@@ -31,13 +31,22 @@
   let rateLimitMessage = $state<string | null>(null);
   let rateLimitHitOnFirst = $state(false);
 
+  // Filter options
+  let filterText = $state('');
+
   // Sorting options
   let sortBy = $state<'name' | 'count' | 'date'>('name');
   let sortOrder = $state<'asc' | 'desc'>('asc');
-  let sortedGroups = $state<PackageGroup[]>([]);
-
-  // Filter options
-  let filterText = $state('');
+  let sortedGroups: PackageGroup[] = $derived(
+    (() => {
+      if (!groupedReleases) return [];
+      const ft = filterText.toLowerCase();
+      const needFilter = !!filterText;
+      return sortPackageGroups(groupedReleases.groups, sortBy, sortOrder).filter(
+        (g) => !needFilter || g.name.toLowerCase().includes(ft),
+      );
+    })(),
+  );
 
   // View options
   let viewMode = $state<'list' | 'cards'>('list');
@@ -53,7 +62,6 @@
       // Append releases and regroup
       releases = [...releases, ...resp.releases];
       groupedReleases = groupReleasesByPackage(releases, repo);
-      updateSortedGroups();
       return true;
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err);
@@ -112,33 +120,6 @@
     }
     loadingMore = false;
   }
-
-  // Update sorted groups when sort options change
-  function updateSortedGroups() {
-    if (!groupedReleases) return;
-
-    // Apply sorting
-    sortedGroups = sortPackageGroups(groupedReleases.groups, sortBy, sortOrder);
-
-    // Apply filtering if needed
-    if (filterText) {
-      sortedGroups = sortedGroups.filter((group) => group.name.toLowerCase().includes(filterText.toLowerCase()));
-    }
-  }
-
-  // Watch for changes to sort options
-  $effect(() => {
-    if (sortBy || sortOrder) {
-      updateSortedGroups();
-    }
-  });
-
-  // Watch for changes to filter text
-  $effect(() => {
-    if (filterText !== undefined) {
-      updateSortedGroups();
-    }
-  });
 
   // Fetch releases on component mount
   onMount(() => {
