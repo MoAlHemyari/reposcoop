@@ -37,16 +37,16 @@
   // Sorting options
   let sortBy = $state<'name' | 'count' | 'date'>('name');
   let sortOrder = $state<'asc' | 'desc'>('asc');
-  let sortedGroups: PackageGroup[] = $derived(
-    (() => {
-      if (!groupedReleases) return [];
-      const ft = filterText.toLowerCase();
-      const needFilter = !!filterText;
-      return sortPackageGroups(groupedReleases.groups, sortBy, sortOrder).filter(
-        (g) => !needFilter || g.name.toLowerCase().includes(ft),
-      );
-    })(),
-  );
+
+  let sortedGroups: PackageGroup[] = $derived.by(() => {
+    if (!groupedReleases) return [];
+    let groups = groupedReleases.groups;
+
+    const searchTerm = filterText.toLowerCase();
+    groups = groups.filter((group) => group.name.toLowerCase().includes(searchTerm));
+
+    return sortPackageGroups(groups, sortBy, sortOrder);
+  });
 
   // View options
   let viewMode = $state<'list' | 'cards'>('list');
